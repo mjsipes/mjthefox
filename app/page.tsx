@@ -14,11 +14,27 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import Image from "next/image";
+import { PhotoCarousel } from "@/components/photo-carousel";
 
 const supabaseUrl = "https://gjbeonnspjcwyrpgcnuz.supabase.co";
 const supabaseStoragePath = "/storage/v1/object/public/mj-photos";
 
 export default function Home() {
+  const carouselImages = [
+    {
+      src: `${supabaseUrl}${supabaseStoragePath}/home/1.jpg`,
+      alt: "Switzerland Photo 1"
+    },
+    {
+      src: `${supabaseUrl}${supabaseStoragePath}/home/3.jpg`,
+      alt: "Switzerland Photo 2"
+    },
+    {
+      src: `${supabaseUrl}${supabaseStoragePath}/home/2.jpg`,
+      alt: "Switzerland Photo 3"
+    }
+  ];
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -47,26 +63,7 @@ export default function Home() {
             height={1000}
             alt="Switzerland Pano"
           />
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <Image
-              src={`${supabaseUrl}${supabaseStoragePath}/home/1.jpg`}
-              width={1500}
-              height={1000}
-              alt="Switzerland Pano"
-            />
-            <Image
-              src={`${supabaseUrl}${supabaseStoragePath}/home/2.jpg`}
-              width={1500}
-              height={1000}
-              alt="Switzerland Pano"
-            />
-            <Image
-              src={`${supabaseUrl}${supabaseStoragePath}/home/3.jpg`}
-              width={1500}
-              height={1000}
-              alt="Switzerland Pano"
-            />
-          </div>
+          <PhotoCarousel images={carouselImages} />
         </div>
       </SidebarInset>
     </SidebarProvider>
