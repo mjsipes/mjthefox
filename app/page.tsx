@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,15 +6,17 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 import Image from "next/image";
 
+const supabaseUrl = "https://gjbeonnspjcwyrpgcnuz.supabase.co";
+const supabaseStoragePath = "/storage/v1/object/public/mj-photos";
 
 export default function Home() {
   return (
@@ -28,9 +30,7 @@ export default function Home() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    mjthefox.com
-                  </BreadcrumbLink>
+                  <BreadcrumbLink href="#">mjthefox.com</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
@@ -41,20 +41,34 @@ export default function Home() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
+          <Image
+            src={`${supabaseUrl}${supabaseStoragePath}/home/pano.jpg`}
+            width={1500}
+            height={1000}
+            alt="Switzerland Pano"
+          />
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
             <Image
-              src="https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos//IMG_3509.jpg"
-              width={2000}
-              height={2000}
-              alt="Picture of the author"
+              src={`${supabaseUrl}${supabaseStoragePath}/home/1.jpg`}
+              width={1500}
+              height={1000}
+              alt="Switzerland Pano"
+            />
+            <Image
+              src={`${supabaseUrl}${supabaseStoragePath}/home/2.jpg`}
+              width={1500}
+              height={1000}
+              alt="Switzerland Pano"
+            />
+            <Image
+              src={`${supabaseUrl}${supabaseStoragePath}/home/3.jpg`}
+              width={1500}
+              height={1000}
+              alt="Switzerland Pano"
             />
           </div>
-
         </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }
