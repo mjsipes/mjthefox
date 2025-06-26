@@ -23,16 +23,16 @@ export default function Home() {
   const carouselImages = [
     {
       src: `${supabaseUrl}${supabaseStoragePath}/home/1.jpg`,
-      alt: "Switzerland Photo 1"
-    },
-    {
-      src: `${supabaseUrl}${supabaseStoragePath}/home/3.jpg`,
-      alt: "Switzerland Photo 2"
+      alt: "Switzerland Photo 1",
     },
     {
       src: `${supabaseUrl}${supabaseStoragePath}/home/2.jpg`,
-      alt: "Switzerland Photo 3"
-    }
+      alt: "Switzerland Photo 2",
+    },
+    {
+      src: `${supabaseUrl}${supabaseStoragePath}/home/3.jpg`,
+      alt: "Switzerland Photo 3",
+    },
   ];
 
   return (
@@ -57,13 +57,17 @@ export default function Home() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <Image
-            src={`${supabaseUrl}${supabaseStoragePath}/home/pano.jpg`}
-            width={1500}
-            height={1000}
-            alt="Switzerland Pano"
-          />
-          <PhotoCarousel images={carouselImages} />
+          <div className="relative w-full">
+            <Image
+              src={`${supabaseUrl}${supabaseStoragePath}/home/pano.jpg`}
+              width={1200}
+              height={800}
+              alt="Switzerland Pano"
+              className="w-full h-auto object-cover"
+              priority
+            />
+            <PhotoCarousel images={carouselImages} />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
