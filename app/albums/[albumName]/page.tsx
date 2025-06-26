@@ -2,34 +2,40 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Image from "next/image";
 
-export default async function Albums() {
+export default async function Albums({ params }: { params: { albumName: string } }) {
+  const { albumName } = params;
+  console.log("Album Name:", albumName);
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
+
   const { data: instruments } = await supabase.from("instruments").select();
   console.log("Instruments:", instruments);
 
-  const { data, error } = await supabase.storage
+  const { data: items, error } = await supabase.storage
     .from("mj-photos")
-    .list("deep space");
-  console.log("Storage Data:", data);
+    .list(albumName);
+  console.log("Storage Data:", items);
   console.error("Storage Error:", error);
 
-  for (const item of data || []) {
-    console.log("Item:", item.name);
+  const publicUrls = items?.map((item) => {
     const { data } = supabase.storage
       .from("mj-photos")
-      .getPublicUrl(`deep space/${item.name}`);
-    console.log("Public URL:", data.publicUrl);
-  }
+      .getPublicUrl(`${albumName}/${item.name}`);
+    return data.publicUrl;
+  }) || [];
+
   return (
-    <div className="relative w-full h-full">
-      <Image
-        src="https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos//IMG_3509.jpg"
-        width={2000}
-        height={2000}
-        alt="Picture of the author"
-        className="object-cover w-full h-full"
-      />
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4">
+      {publicUrls.map((url, i) => (
+        <div key={i} className="relative w-full aspect-square">
+          <Image
+            src={url}
+            alt={`Photo ${i + 1}`}
+            fill
+            className="object-cover rounded"
+          />
+        </div>
+      ))}
     </div>
   );
 }
