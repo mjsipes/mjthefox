@@ -10,7 +10,7 @@ export default async function Page() {
   const { data: todos } = await supabase.from('todos').select()
 
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4">
+    <div className="relative w-full h-full">
       <Image
         src="https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos//IMG_3509.jpg"
         width={2000}
