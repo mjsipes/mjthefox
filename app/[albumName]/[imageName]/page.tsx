@@ -1,13 +1,13 @@
 import Image from "next/image";
 
-interface ImageViewProps {
+type Props = {
   params: {
     albumName: string;
     imageName: string;
   };
-}
+};
 
-export default function ImageView({ params }: ImageViewProps) {
+export default function ImageView({ params }: Props) {
   const { albumName, imageName } = params;
 
   const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/${imageName}`;
