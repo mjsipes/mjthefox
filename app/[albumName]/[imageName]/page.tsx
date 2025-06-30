@@ -1,13 +1,12 @@
+// app/[albumName]/[imageName]/page.tsx
+
 import Image from "next/image";
 
-type Props = {
-  params: {
-    albumName: string;
-    imageName: string;
-  };
-};
-
-export default function ImageView({ params }: Props) {
+export default function ImageView({
+  params,
+}: {
+  params: { albumName: string; imageName: string };
+}) {
   const { albumName, imageName } = params;
 
   const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/${imageName}`;
