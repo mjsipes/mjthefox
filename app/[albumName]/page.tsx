@@ -29,7 +29,7 @@ export default async function Albums({
     })) || [];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-2">
       {publicUrls.map((item, i) => (
         <Link 
           key={i} 
@@ -39,9 +39,8 @@ export default async function Albums({
           <Image
             src={item.url}
             alt={`Image ${i + 1}`}
-            width={500}
-            height={500}
-            className="object-cover rounded-lg"
+            width={1000}
+            height={1000}
           />
         </Link>
       ))}
