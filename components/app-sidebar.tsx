@@ -24,35 +24,35 @@ const data = {
       items: [
         {
           title: "San Francisco",
-          url: "/albums/san-francisco",
+          url: "/san-francisco",
         },
         {
           title: "Sonoma",
-          url: "/albums/sonoma",
+          url: "/sonoma",
         },
         {
           title: "Half Moon Bay",
-          url: "/albums/half-moon-bay",
+          url: "/half-moon-bay",
         },
         {
           title: "Kauai",
-          url: "/albums/kauai",
+          url: "/kauai",
         },
         {
           title: "Yosemite",
-          url: "/albums/yosemite",
+          url: "/yosemite",
         },
         {
           title: "New Zealand",
-          url: "/albums/new-zealand",
+          url: "/new-zealand",
         },
         {
           title: "Home",
-          url: "/albums/home",
+          url: "/home",
         },
         {
           title: "Joshua Tree",
-          url: "/albums/joshua-tree",
+          url: "/joshua-tree",
         },
       ],
     },
@@ -62,23 +62,23 @@ const data = {
       items: [
         {
           title: "Day In The Life Of A Desert Tortoise",
-          url: "/albums/day-in-the-life-of-a-desert-tortoise",
+          url: "/day-in-the-life-of-a-desert-tortoise",
         },
         {
           title: "Project Nuance",
-          url: "/albums/project-nuance",
+          url: "/project-nuance",
         },
         {
           title: "Celestial",
-          url: "/albums/celestial",
+          url: "/celestial",
         },
         {
           title: "Cloud 9",
-          url: "/albums/cloud-9",
+          url: "/cloud-9",
         },
         {
           title: "SFO - AMST",
-          url: "/albums/sfo-amst",
+          url: "/sfo-amst",
         },
       ],
     },

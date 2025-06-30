@@ -33,7 +33,7 @@ export default async function Albums({
       {publicUrls.map((item, i) => (
         <Link 
           key={i} 
-          href={`/albums/${albumName}/${item.name}`}
+          href={`/${albumName}/${item.name}`}
           className="relative w-full aspect-square block hover:opacity-90 transition-opacity"
         >
           <Image
