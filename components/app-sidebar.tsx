@@ -24,30 +24,36 @@ const data = {
       items: [
         {
           title: "San Francisco",
-          url: "#",
+          url: "/albums/san-francisco",
         },
         {
           title: "Sonoma",
-          url: "#",
-          isActive: true,
+          url: "/albums/sonoma",
         },
         {
           title: "Half Moon Bay",
-          url: "#",
+          url: "/albums/half-moon-bay",
         },
         {
           title: "Kauai",
-          url: "#",
+          url: "/albums/kauai",
         },
         {
           title: "Yosemite",
-          url: "#",
+          url: "/albums/yosemite",
         },
         {
           title: "New Zealand",
-          url: "#",
+          url: "/albums/new-zealand",
         },
-        
+        {
+          title: "Home",
+          url: "/albums/home",
+        },
+        {
+          title: "Joshua Tree",
+          url: "/albums/joshua-tree",
+        },
       ],
     },
     {
@@ -56,27 +62,26 @@ const data = {
       items: [
         {
           title: "Day In The Life Of A Desert Tortoise",
-          url: "#",
+          url: "/albums/day-in-the-life-of-a-desert-tortoise",
         },
         {
           title: "Project Nuance",
-          url: "#",
+          url: "/albums/project-nuance",
         },
         {
           title: "Celestial",
-          url: "#",
+          url: "/albums/celestial",
         },
         {
           title: "Cloud 9",
-          url: "#",
+          url: "/albums/cloud-9",
         },
         {
           title: "SFO - AMST",
-          url: "#",
+          url: "/albums/sfo-amst",
         },
       ],
     },
-    
   ],
 }
 
@@ -113,7 +118,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <SidebarMenuSub>
                     {item.items.map((item) => (
                       <SidebarMenuSubItem key={item.title}>
-                        <SidebarMenuSubButton asChild isActive={item.isActive}>
+                        <SidebarMenuSubButton asChild>
                           <a href={item.url}>{item.title}</a>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>

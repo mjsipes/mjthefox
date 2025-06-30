@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Albums({
   params,
@@ -22,22 +23,27 @@ export default async function Albums({
   console.error("Storage Error:", error);
 
   const publicUrls =
-    items?.map(
-      (item) =>
-        `https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/${albumName}/${item.name}`
-    ) || [];
+    items?.map((item) => ({
+      url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/${item.name}`,
+      name: item.name,
+    })) || [];
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4">
-      {publicUrls.map((url, i) => (
-        <div key={i} className="relative w-full aspect-square">
+      {publicUrls.map((item, i) => (
+        <Link 
+          key={i} 
+          href={`/albums/${albumName}/${item.name}`}
+          className="relative w-full aspect-square block hover:opacity-90 transition-opacity"
+        >
           <Image
-            src={url}
+            src={item.url}
             alt={`Image ${i + 1}`}
             width={500}
             height={500}
+            className="object-cover rounded-lg"
           />
-        </div>
+        </Link>
       ))}
     </div>
   );
