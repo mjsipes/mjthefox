@@ -1,4 +1,6 @@
 import * as React from "react"
+import Link from "next/link"
+import Image from "next/image"
 
 import {
   Sidebar,
@@ -91,12 +93,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="/">
-                <img src="/turtle.jpeg" alt="Turtle" className="aspect-square size-8 rounded-lg" />
+              <Link href="/">
+                <Image src="/turtle.jpeg" alt="Turtle" className="aspect-square size-8 rounded-lg" width={32} height={32} />
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-medium">Mjsipes Photography</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -107,16 +109,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             {data.navMain.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild>
-                  <a href={item.url} className="font-medium">
+                  <Link href={item.url} className="font-medium">
                     {item.title}
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
                 {item.items?.length ? (
                   <SidebarMenuSub>
                     {item.items.map((item) => (
                       <SidebarMenuSubItem key={item.title}>
                         <SidebarMenuSubButton asChild>
-                          <a href={item.url}>{item.title}</a>
+                          <Link href={item.url}>{item.title}</Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
                     ))}
