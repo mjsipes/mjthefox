@@ -24,7 +24,7 @@ export default async function Albums({
 
   const publicUrls =
     items?.map((item) => ({
-      url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/${item.name}`,
+      url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/${item.name}?width=400`, // thumbnail with width 400px
       name: item.name,
     })) || [];
 
