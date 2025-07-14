@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import ZoomablePanImage from "@/components/zoomable-pan-image";
 
 const images = [
   "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/project-nuance/2-IMG_8468.jpg",
@@ -19,7 +20,7 @@ const images2 = [
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
-      <Image
+      <ZoomablePanImage
         src={image}
         alt="Project Nuance"
         width={1200}
