@@ -29,12 +29,12 @@ export default async function Albums({
     })) || [];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-2 md:grid-cols-2 gap-4 p-4">
       {publicUrls.map((item, i) => (
         <Link 
           key={i} 
           href={`/${albumName}/${item.name}`}
-          className="relative w-full aspect-square block hover:opacity-90 transition-opacity"
+          className="relative w-full block hover:opacity-90 transition-opacity"
         >
           <Image
             src={item.url}
