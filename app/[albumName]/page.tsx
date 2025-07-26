@@ -13,18 +13,15 @@ export default async function Albums({
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const { data: instruments } = await supabase.from("instruments").select();
-  console.log("Instruments:", instruments);
-
   const { data: items, error } = await supabase.storage
     .from("mj-photos")
-    .list(albumName);
+    .list(`${albumName}/small`);
   console.log("Storage Data:", items);
   console.error("Storage Error:", error);
 
   const publicUrls =
     items?.map((item) => ({
-      url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/${item.name}?width=400`, // thumbnail with width 400px
+      url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/small/${item.name}?width=400`, // thumbnail with width 400px
       name: item.name,
     })) || [];
 

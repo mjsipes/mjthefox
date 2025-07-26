@@ -9,7 +9,7 @@ export default function ImageView({
 }) {
   const { albumName, imageName } = params;
 
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/${imageName}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/small/${imageName}`;
 
   return (
     <div className="flex items-center justify-center min-h-screen">
