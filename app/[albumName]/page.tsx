@@ -21,12 +21,12 @@ export default async function Albums({
 
   const publicUrls =
     items?.map((item) => ({
-      url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/small/${item.name}?width=400`, // thumbnail with width 400px
+      url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/small/${item.name}`, // thumbnail with width 400px
       name: item.name,
     })) || [];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-2 gap-4 p-4">
+    <div className="grid grid-cols-2 gap-4 p-4">
       {publicUrls.map((item, i) => (
         <Link 
           key={i} 
@@ -37,7 +37,7 @@ export default async function Albums({
             src={item.url}
             alt={`Image ${i + 1}`}
             width={1000}
-            height={1000}
+            height={800}
           />
         </Link>
       ))}
