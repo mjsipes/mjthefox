@@ -1,6 +1,6 @@
 // app/[albumName]/[imageName]/page.tsx
 
-import Image from "next/image";
+import ImageViewer from '@/components/image-viewer';
 
 export default function ImageView({
   params,
@@ -9,18 +9,5 @@ export default function ImageView({
 }) {
   const { albumName, imageName } = params;
 
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/small/${imageName}`;
-
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <Image
-        src={imageUrl}
-        alt={`${imageName} from ${albumName}`}
-        width={1200}
-        height={1200}
-        className="max-w-full max-h-screen object-contain"
-        priority
-      />
-    </div>
-  );
+  return <ImageViewer albumName={albumName} imageName={imageName} />;
 }
