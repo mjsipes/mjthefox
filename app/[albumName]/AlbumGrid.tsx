@@ -13,7 +13,7 @@ export default function AlbumGrid({
 }: {
   albumName: string;
 }) {
-  const { albumImageMetadata, loading } = useAlbumImagesMetadata(albumName);
+  const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
 
   useEffect(() => {
@@ -28,14 +28,12 @@ export default function AlbumGrid({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [router]);
 
-  if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
-  }
-
   return (
     <div className="grid grid-cols-2 gap-4 p-4">
       {albumImageMetadata.length === 0 ? (
-        <p className="text-center text-gray-500 col-span-2">No images found.</p>
+        <div className="flex items-center justify-center col-span-2 min-h-screen">
+          <img src="/favicon.ico" alt="Loading" className="w-8 h-8" />
+        </div>
       ) : (
         albumImageMetadata.map((item, i) => (
           <Link

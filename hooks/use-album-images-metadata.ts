@@ -12,8 +12,8 @@ import { createClient } from "@/utils/supabase/client";
  * @returns Object containing images array and loading state
  */
 export function useAlbumImagesMetadata(albumName: string) {
+  console.log("useAlbumImagesMetadata: ", albumName);
   const [albumImageMetadata, setAlbumImageMetadata] = useState<{name: string, url: string}[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const cached = sessionStorage.getItem(`album-grid-${albumName}`);
@@ -21,7 +21,6 @@ export function useAlbumImagesMetadata(albumName: string) {
     if (cached) {
       const cachedMetadata = JSON.parse(cached);
       setAlbumImageMetadata(cachedMetadata);
-      setLoading(false);
     } else {
       const supabase = createClient();
       supabase.storage
@@ -38,10 +37,11 @@ export function useAlbumImagesMetadata(albumName: string) {
           
           setAlbumImageMetadata(metadata);
           sessionStorage.setItem(`album-grid-${albumName}`, JSON.stringify(metadata));
-          setLoading(false);
         });
     }
   }, [albumName]);
 
-  return { albumImageMetadata, loading };
+  console.log("albumImageMetadata: ", albumImageMetadata);
+
+  return { albumImageMetadata };
 } 

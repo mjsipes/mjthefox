@@ -13,7 +13,7 @@ export default function ImageView({
   albumName: string;
   imageName: string;
 }) {
-  const { albumImageMetadata, loading } = useAlbumImagesMetadata(albumName);
+  const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
 
   useEffect(() => {
@@ -49,25 +49,25 @@ export default function ImageView({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [imageName, albumImageMetadata, albumName, router]);
 
-  if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
-  }
-
   const imagePath = `mj-photos/${albumName}/large/${imageName}`;
 
   return (
     <div className="flex items-center justify-center min-h-screen p-8">
-      <Image
-        loader={supabaseLoader as ImageLoader}
-        src={imagePath}
-        alt={`${imageName} from ${albumName}`}
-        width={1600}
-        height={1200}
-        className="max-w-full max-h-screen object-contain"
-        quality={85}
-        priority
-        sizes="100vw"
-      />
+      {albumImageMetadata.length === 0 ? (
+        <img src="/favicon.ico" alt="Loading" className="w-8 h-8" />
+      ) : (
+        <Image
+          loader={supabaseLoader as ImageLoader}
+          src={imagePath}
+          alt={`${imageName} from ${albumName}`}
+          width={1600}
+          height={1200}
+          className="max-w-full max-h-screen object-contain"
+          quality={85}
+          priority
+          sizes="100vw"
+        />
+      )}
     </div>
   );
 }
