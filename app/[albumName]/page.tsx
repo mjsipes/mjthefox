@@ -9,7 +9,7 @@ export default async function Albums({
 }) {
   const { albumName } = await params;
 
-  const supabase = createClient(cookies());
+  const supabase = createClient(await cookies());
 
   const BUCKET = "mj-photos";
   const { data: items, error } = await supabase.storage
