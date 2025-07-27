@@ -40,6 +40,8 @@ export default async function Albums({
             alt={`Image ${i + 1}`}
             width={1000}
             height={800}
+        quality={95}
+
           />
         </Link>
       ))}

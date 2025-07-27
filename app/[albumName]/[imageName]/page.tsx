@@ -62,9 +62,10 @@ export default function ImageView({
       <Image
         src={imageUrl}
         alt={`${imageName} from ${albumName}`}
-        width={4000}
-        height={3000}
+        width={6000}
+        height={6000}
         className="max-w-full max-h-screen object-contain"
+        quality={95}
         priority
       />
     </div>

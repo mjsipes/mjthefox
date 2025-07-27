@@ -35,6 +35,7 @@ export function PhotoCarousel({ images, speed = 50 }: PhotoCarouselProps) {
                 alt={image.alt}
                 fill
                 className="object-cover"
+                quality={85}
               />
             </div>
           ))}
