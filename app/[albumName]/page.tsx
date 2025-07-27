@@ -1,5 +1,3 @@
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
 import AlbumGrid from "./AlbumGrid";
 
 export default async function Albums({
@@ -9,22 +7,5 @@ export default async function Albums({
 }) {
   const { albumName } = await params;
 
-  const supabase = createClient(await cookies());
-
-  const BUCKET = "mj-photos";
-  const { data: items, error } = await supabase.storage
-    .from(BUCKET)
-    .list(`${albumName}/small`);
-
-  if (error) {
-    console.error("Storage Error:", error);
-  }
-
-  const publicUrls =
-    items?.map((item) => ({
-      name: item.name,
-      url: `${BUCKET}/${albumName}/small/${item.name}`,
-    })) || [];
-
-  return <AlbumGrid albumName={albumName} images={publicUrls} />;
+  return <AlbumGrid albumName={albumName} />;
 }
