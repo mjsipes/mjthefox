@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { ImageLoader } from "next/image";
-import supabaseLoader from "@/lib/supabase-image-loader";
+import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 
 
 export default function Home() {

@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
-import supabaseLoader from "@/lib/supabase-image-loader";
+import { useRouter } from "next/navigation";
+import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { ImageLoader } from "next/image";
 
 export default function AlbumGrid({
@@ -14,6 +15,7 @@ export default function AlbumGrid({
 }) {
   const [images, setImages] = useState<{ name: string; url: string }[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const cached = sessionStorage.getItem(`album-grid-${albumName}`);
@@ -44,6 +46,18 @@ export default function AlbumGrid({
         });
     }
   }, [albumName]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        router.push('/');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [router]);
 
   if (loading) {
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
