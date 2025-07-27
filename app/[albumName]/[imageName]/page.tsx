@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import Image from 'next/image';
 import { createClient } from '@/utils/supabase/client';
 import { useKeyboardNavigation } from '@/hooks/use-keyboard-navigation';
@@ -8,9 +8,9 @@ import { useKeyboardNavigation } from '@/hooks/use-keyboard-navigation';
 export default function ImageView({
   params,
 }: {
-  params: { albumName: string; imageName: string };
+  params: Promise<{ albumName: string; imageName: string }>;
 }) {
-  const { albumName, imageName } = params;
+  const { albumName, imageName } = use(params);
   const [imageNames, setImageNames] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 

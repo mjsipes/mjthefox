@@ -6,9 +6,9 @@ import Link from "next/link";
 export default async function Albums({
   params,
 }: {
-  params: { albumName: string };
+  params: Promise<{ albumName: string }>;
 }) {
-  const { albumName } = params;
+  const { albumName } = await params;
   console.log("Album Name:", albumName);
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
