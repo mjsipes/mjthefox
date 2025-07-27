@@ -30,11 +30,7 @@ export default function AlbumGrid({
 
   return (
     <div className="grid grid-cols-2 gap-4 p-4">
-      {albumImageMetadata.length === 0 ? (
-        <div className="flex items-center justify-center col-span-2 min-h-screen">
-          <img src="/favicon.ico" alt="Loading" className="w-8 h-8" />
-        </div>
-      ) : (
+      {
         albumImageMetadata.map((item, i) => (
           <Link
             key={i}
@@ -53,7 +49,7 @@ export default function AlbumGrid({
             />
           </Link>
         ))
-      )}
+      }
     </div>
   );
 }

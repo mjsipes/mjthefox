@@ -53,9 +53,6 @@ export default function ImageView({
 
   return (
     <div className="flex items-center justify-center min-h-screen p-8">
-      {albumImageMetadata.length === 0 ? (
-        <img src="/favicon.ico" alt="Loading" className="w-8 h-8" />
-      ) : (
         <Image
           loader={supabaseLoader as ImageLoader}
           src={imagePath}
@@ -67,7 +64,6 @@ export default function ImageView({
           priority
           sizes="100vw"
         />
-      )}
     </div>
   );
 }
