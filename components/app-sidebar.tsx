@@ -90,7 +90,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
-                <Image src="/turtle.jpeg" alt="Turtle" className="aspect-square size-8 rounded-lg" width={32} height={32} />
+                <Image src="/favicon.ico" alt="Turtle" className="aspect-square size-8 " width={32} height={32} />
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-medium">Mjsipes Photography</span>
                 </div>
