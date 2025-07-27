@@ -16,8 +16,10 @@ export default async function Albums({
   const { data: items, error } = await supabase.storage
     .from("mj-photos")
     .list(`${albumName}/small`);
+    if (error) {
+      console.error("Storage Error:", error);
+    }
   console.log("Storage Data:", items);
-  console.error("Storage Error:", error);
 
   const publicUrls =
     items?.map((item) => ({
