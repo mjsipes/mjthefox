@@ -1,51 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { ImageLoader } from "next/image";
+import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
 
 export default function AlbumGrid({
   albumName,
 }: {
   albumName: string;
 }) {
-  const [images, setImages] = useState<{ name: string; url: string }[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { albumImageMetadata, loading } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
-
-  useEffect(() => {
-    const cached = sessionStorage.getItem(`album-grid-${albumName}`);
-
-    if (cached) {
-      setImages(JSON.parse(cached));
-      setLoading(false);
-    } else {
-      const supabase = createClient();
-      const BUCKET = "mj-photos";
-      
-      supabase.storage
-        .from(BUCKET)
-        .list(`${albumName}/large`)
-        .then(({ data, error }) => {
-          if (error) {
-            console.error("Storage Error:", error);
-          }
-          
-          const publicUrls = data?.map((item) => ({
-            name: item.name,
-            url: `${BUCKET}/${albumName}/large/${item.name}`,
-          })) || [];
-          
-          setImages(publicUrls);
-          sessionStorage.setItem(`album-grid-${albumName}`, JSON.stringify(publicUrls));
-          setLoading(false);
-        });
-    }
-  }, [albumName]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -65,10 +34,10 @@ export default function AlbumGrid({
 
   return (
     <div className="grid grid-cols-2 gap-4 p-4">
-      {images.length === 0 ? (
+      {albumImageMetadata.length === 0 ? (
         <p className="text-center text-gray-500 col-span-2">No images found.</p>
       ) : (
-        images.map((item, i) => (
+        albumImageMetadata.map((item, i) => (
           <Link
             key={i}
             href={`/${albumName}/${item.name}`}

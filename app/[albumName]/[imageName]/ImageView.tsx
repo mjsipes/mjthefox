@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Image, { ImageLoader } from "next/image";
-import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
-
+import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
 
 export default function ImageView({
   albumName,
@@ -14,35 +13,12 @@ export default function ImageView({
   albumName: string;
   imageName: string;
 }) {
-  const [imageNames, setImageNames] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { albumImageMetadata, loading } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
 
   useEffect(() => {
-    const cached = sessionStorage.getItem(`album-${albumName}`);
-
-    if (cached) {
-      setImageNames(JSON.parse(cached));
-      setLoading(false);
-    } else {
-      const supabase = createClient();
-      supabase.storage
-        .from("mj-photos")
-        .list(`${albumName}/large`)
-        .then(({ data }) => {
-          if (data) {
-            const names = data.map((item) => item.name);
-            setImageNames(names);
-            sessionStorage.setItem(`album-${albumName}`, JSON.stringify(names));
-          }
-          setLoading(false);
-        });
-    }
-  }, [albumName]);
-
-  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      const currentIndex = imageNames.findIndex(name => name === imageName);
+      const currentIndex = albumImageMetadata.findIndex(img => img.name === imageName);
       
       if (currentIndex === -1) return;
 
@@ -50,15 +26,15 @@ export default function ImageView({
         case 'ArrowLeft':
           console.log('ArrowLeft');
           event.preventDefault();
-          const prevIndex = currentIndex === 0 ? imageNames.length - 1 : currentIndex - 1;
-          router.push(`/${albumName}/${imageNames[prevIndex]}`);
+          const prevIndex = currentIndex === 0 ? albumImageMetadata.length - 1 : currentIndex - 1;
+          router.push(`/${albumName}/${albumImageMetadata[prevIndex].name}`);
           break;
         
         case 'ArrowRight':
           console.log('ArrowRight');
           event.preventDefault();
-          const nextIndex = currentIndex === imageNames.length - 1 ? 0 : currentIndex + 1;
-          router.push(`/${albumName}/${imageNames[nextIndex]}`);
+          const nextIndex = currentIndex === albumImageMetadata.length - 1 ? 0 : currentIndex + 1;
+          router.push(`/${albumName}/${albumImageMetadata[nextIndex].name}`);
           break;
         
         case 'Escape':
@@ -71,7 +47,7 @@ export default function ImageView({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [imageName, imageNames, albumName, router]);
+  }, [imageName, albumImageMetadata, albumName, router]);
 
   if (loading) {
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
