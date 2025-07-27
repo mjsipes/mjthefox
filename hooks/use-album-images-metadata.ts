@@ -17,7 +17,7 @@ export function useAlbumImagesMetadata(albumName: string) {
 
   useEffect(() => {
     const cached = sessionStorage.getItem(`album-grid-${albumName}`);
-
+  
     if (cached) {
       const cachedMetadata = JSON.parse(cached);
       setAlbumImageMetadata(cachedMetadata);
@@ -30,16 +30,27 @@ export function useAlbumImagesMetadata(albumName: string) {
           if (error) {
             console.error("Storage Error:", error);
           }
-          const metadata = data?.map((item) => ({
-            name: item.name,
-            url: `mj-photos/${albumName}/large/${item.name}`,
-          })) || [];
-          
+  
+          const metadata = (data || [])
+            .map((item) => ({
+              name: item.name,
+              url: `mj-photos/${albumName}/large/${item.name}`,
+            }))
+            .sort((a, b) => {
+              const getLeadingNumber = (filename: string) => {
+                const match = filename.match(/^(\d+)-/);
+                return match ? parseInt(match[1], 10) : 0;
+              };
+  
+              return getLeadingNumber(a.name) - getLeadingNumber(b.name);
+            });
+  
           setAlbumImageMetadata(metadata);
           sessionStorage.setItem(`album-grid-${albumName}`, JSON.stringify(metadata));
         });
     }
   }, [albumName]);
+  
 
   console.log("albumImageMetadata: ", albumImageMetadata);
 
