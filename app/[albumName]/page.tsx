@@ -1,7 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import Image from "next/image";
-import Link from "next/link";
+import AlbumGrid from "./AlbumGrid";
 
 export default async function Albums({
   params,
@@ -9,42 +8,23 @@ export default async function Albums({
   params: Promise<{ albumName: string }>;
 }) {
   const { albumName } = await params;
-  console.log("Album Name:", albumName);
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
 
+  const supabase = createClient(cookies());
+
+  const BUCKET = "mj-photos";
   const { data: items, error } = await supabase.storage
-    .from("mj-photos")
+    .from(BUCKET)
     .list(`${albumName}/small`);
-    if (error) {
-      console.error("Storage Error:", error);
-    }
-  console.log("Storage Data:", items);
+
+  if (error) {
+    console.error("Storage Error:", error);
+  }
 
   const publicUrls =
     items?.map((item) => ({
-      url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/${albumName}/small/${item.name}`, // thumbnail with width 400px
       name: item.name,
+      url: `${BUCKET}/${albumName}/small/${item.name}`,
     })) || [];
 
-  return (
-    <div className="grid grid-cols-2 gap-4 p-4">
-      {publicUrls.map((item, i) => (
-        <Link 
-          key={i} 
-          href={`/${albumName}/${item.name}`}
-          className="relative w-full block hover:opacity-90 transition-opacity"
-        >
-          <Image
-            src={item.url}
-            alt={`Image ${i + 1}`}
-            width={1000}
-            height={800}
-        quality={95}
-
-          />
-        </Link>
-      ))}
-    </div>
-  );
+  return <AlbumGrid albumName={albumName} images={publicUrls} />;
 }
