@@ -48,18 +48,21 @@ export default function ImageView({
 
       switch (event.key) {
         case 'ArrowLeft':
+          console.log('ArrowLeft');
           event.preventDefault();
           const prevIndex = currentIndex === 0 ? imageNames.length - 1 : currentIndex - 1;
           router.push(`/${albumName}/${imageNames[prevIndex]}`);
           break;
         
         case 'ArrowRight':
+          console.log('ArrowRight');
           event.preventDefault();
           const nextIndex = currentIndex === imageNames.length - 1 ? 0 : currentIndex + 1;
           router.push(`/${albumName}/${imageNames[nextIndex]}`);
           break;
         
         case 'Escape':
+          console.log('Escape');
           event.preventDefault();
           router.push(`/${albumName}`);
           break;
@@ -85,7 +88,7 @@ export default function ImageView({
         width={1600}
         height={1200}
         className="max-w-full max-h-screen object-contain"
-        quality={75}
+        quality={85}
         priority
         sizes="100vw"
       />
