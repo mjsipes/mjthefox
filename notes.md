@@ -1,14 +1,20 @@
-lightroom -> supabase buckets (organize my photos with lightroom)
 
 
-understand all of the log statements and code and make image serving faster
 
-
-make styling identical to mjthefox.com
-
-experiment with sora / dalle in chatgpt / upscaling apis
-
+## ALL ORGANIZED!!
+only creative things to work on = project nuance + 
+experiment with sora / dalle in chatgpt / upscaling apis +
 add custom components
+
+
+## technical
+small -> large serving?
+squarespace store?
+prefetching images
+keyboard navigation and clicking
+
+
+
 
 
 https://www.youtube.com/watch?v=IU_qq_c_lKA&t=499s
