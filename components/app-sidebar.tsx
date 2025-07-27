@@ -48,10 +48,6 @@ const data = {
           url: "/new-zealand",
         },
         {
-          title: "Home",
-          url: "/home",
-        },
-        {
           title: "Joshua Tree",
           url: "/joshua-tree",
         },
