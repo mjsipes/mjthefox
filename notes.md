@@ -12,7 +12,7 @@ small -> large serving?
 squarespace store?
 prefetching images
 keyboard navigation and clicking
-
+imageveiw scroll bar is annoying
 
 
 
