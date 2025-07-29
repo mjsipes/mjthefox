@@ -2,18 +2,9 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-interface PanoramaZoomProps {
-  imageSrc?: string;
-  className?: string;
-}
-
-const PanoramaZoom = ({ 
-  imageSrc = "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/home/large/pano.jpg",
-  className = ""
-}: PanoramaZoomProps) => {
+const PanoramaZoom = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   
   const containerRef = useRef<HTMLDivElement>(null);
@@ -21,12 +12,15 @@ const PanoramaZoom = ({
   const zoomRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
 
+  // Default image source
+  const imageSrc = "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/home/large/pano.jpg";
+
   // Zoom factor for the strip
   const ZOOM_FACTOR = 3;
 
   // Auto-scroll animation
   const animate = useCallback(() => {
-    if (!isHovering && imageLoaded && containerRef.current) {
+    if (!isHovering && imageDimensions.width > 0 && containerRef.current) {
       setScrollPosition(prev => {
         const containerWidth = containerRef.current!.clientWidth;
         const maxScroll = Math.max(0, imageDimensions.width - containerWidth);
@@ -34,7 +28,7 @@ const PanoramaZoom = ({
       });
     }
     animationRef.current = requestAnimationFrame(animate);
-  }, [isHovering, imageLoaded, imageDimensions.width]);
+  }, [isHovering, imageDimensions.width]);
 
   useEffect(() => {
     animationRef.current = requestAnimationFrame(animate);
@@ -46,7 +40,7 @@ const PanoramaZoom = ({
   }, [animate]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || !imageLoaded) return;
+    if (!containerRef.current || imageDimensions.width === 0) return;
     
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -61,7 +55,6 @@ const PanoramaZoom = ({
   };
 
   const handleImageLoad = () => {
-    setImageLoaded(true);
     if (panoramaRef.current) {
       setImageDimensions({
         width: panoramaRef.current.naturalWidth,
@@ -72,7 +65,7 @@ const PanoramaZoom = ({
 
   // Calculate bounding box dimensions and position
   const getBoundingBoxStyle = () => {
-    if (!containerRef.current || !imageLoaded) return {};
+    if (!containerRef.current || imageDimensions.width === 0) return {};
     
     const containerWidth = containerRef.current.clientWidth;
     const displayedImageWidth = containerWidth;
@@ -95,7 +88,7 @@ const PanoramaZoom = ({
 
   // Calculate zoom strip transform
   const getZoomTransform = () => {
-    if (!imageLoaded || !containerRef.current) return 'translateX(0) scale(1)';
+    if (imageDimensions.width === 0 || !containerRef.current) return 'translateX(0) scale(1)';
     
     const containerWidth = containerRef.current.clientWidth;
     const maxScroll = Math.max(0, imageDimensions.width - containerWidth);
@@ -115,14 +108,14 @@ const PanoramaZoom = ({
 
   // Calculate actual scroll percentage for display
   const getScrollPercentage = () => {
-    if (!containerRef.current || !imageLoaded) return 0;
+    if (!containerRef.current || imageDimensions.width === 0) return 0;
     const containerWidth = containerRef.current.clientWidth;
     const maxScroll = Math.max(0, imageDimensions.width - containerWidth);
     return maxScroll > 0 ? Math.round((scrollPosition / maxScroll) * 100) : 0;
   };
 
   return (
-    <div className={`w-full max-w-6xl mx-auto space-y-6 ${className}`}>
+    <div className="w-full mx-auto space-y-6">
       {/* Main Panorama with Bounding Box Overlay - Keep original wide format */}
       <div
         ref={containerRef}
@@ -138,11 +131,10 @@ const PanoramaZoom = ({
           alt="Panorama"
           className="w-full h-full object-cover block"
           onLoad={handleImageLoad}
-          style={{ opacity: imageLoaded ? 1 : 0.5 }}
         />
         
         {/* Bounding Box Overlay - No transitions for immediate response */}
-        {imageLoaded && (
+        {imageDimensions.width > 0 && (
           <div
             className="absolute top-0 h-full border-2 border-primary bg-primary/20 pointer-events-none"
             style={{
@@ -153,7 +145,7 @@ const PanoramaZoom = ({
         )}
         
         {/* Loading indicator */}
-        {!imageLoaded && (
+        {imageDimensions.width === 0 && (
           <div className="absolute inset-0 flex items-center justify-center bg-panorama-zoom-bg">
             <div className="animate-pulse text-muted-foreground">Loading panorama...</div>
           </div>
@@ -166,7 +158,7 @@ const PanoramaZoom = ({
         className="relative w-full overflow-hidden"
         style={{ aspectRatio: '3/2' }}
       >
-        {imageLoaded ? (
+        {imageDimensions.width > 0 ? (
           <div
             className="h-full origin-left"
             style={{ 
@@ -182,7 +174,7 @@ const PanoramaZoom = ({
           </div>
         ) : (
           <div className="flex items-center justify-center h-full bg-panorama-zoom-bg">
-            <div className="animate-pulse text-muted-foreground">Loading zoom view...</div>
+            <div className="animate-pulse text-muted-foreground">Loading panorama...</div>
           </div>
         )}
       </div>

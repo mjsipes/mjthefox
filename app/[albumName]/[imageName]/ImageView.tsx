@@ -16,6 +16,20 @@ export default function ImageView({
   const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
 
+  const navigateToImage = (direction: 'prev' | 'next') => {
+    const currentIndex = albumImageMetadata.findIndex(img => img.name === imageName);
+    if (currentIndex === -1) return;
+
+    let targetIndex: number;
+    if (direction === 'prev') {
+      targetIndex = currentIndex === 0 ? albumImageMetadata.length - 1 : currentIndex - 1;
+    } else {
+      targetIndex = currentIndex === albumImageMetadata.length - 1 ? 0 : currentIndex + 1;
+    }
+    
+    router.push(`/${albumName}/${albumImageMetadata[targetIndex].name}`);
+  };
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const currentIndex = albumImageMetadata.findIndex(img => img.name === imageName);
@@ -26,15 +40,13 @@ export default function ImageView({
         case 'ArrowLeft':
           console.log('ArrowLeft');
           event.preventDefault();
-          const prevIndex = currentIndex === 0 ? albumImageMetadata.length - 1 : currentIndex - 1;
-          router.push(`/${albumName}/${albumImageMetadata[prevIndex].name}`);
+          navigateToImage('prev');
           break;
         
         case 'ArrowRight':
           console.log('ArrowRight');
           event.preventDefault();
-          const nextIndex = currentIndex === albumImageMetadata.length - 1 ? 0 : currentIndex + 1;
-          router.push(`/${albumName}/${albumImageMetadata[nextIndex].name}`);
+          navigateToImage('next');
           break;
         
         case 'Escape':
@@ -52,17 +64,19 @@ export default function ImageView({
   const imagePath = `mj-photos/${albumName}/large/${imageName}`;
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
-        <Image
-          loader={supabaseLoader as ImageLoader}
-          src={imagePath}
-          alt={`${imageName} from ${albumName}`}
-          width={1600}
-          height={1200}
-          className="max-w-full max-h-screen object-contain"
-          quality={95}
-          priority
-        />
+    <div className="flex items-center justify-center min-h-screen p-4 relative">
+      <div className="absolute left-0 top-0 w-1/3 h-full cursor-w-resize" onClick={() => navigateToImage('prev')} />
+      <div className="absolute right-0 top-0 w-1/3 h-full cursor-e-resize" onClick={() => navigateToImage('next')} />
+      <Image
+        loader={supabaseLoader as ImageLoader}
+        src={imagePath}
+        alt={`${imageName} from ${albumName}`}
+        width={1600}
+        height={1200}
+        className="max-w-full max-h-screen object-contain"
+        quality={95}
+        priority
+      />
     </div>
   );
 }
