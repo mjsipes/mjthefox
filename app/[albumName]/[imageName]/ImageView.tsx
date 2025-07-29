@@ -52,7 +52,7 @@ export default function ImageView({
   const imagePath = `mj-photos/${albumName}/large/${imageName}`;
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-8">
+    <div className="flex items-center justify-center min-h-screen p-4">
         <Image
           loader={supabaseLoader as ImageLoader}
           src={imagePath}
