@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import Image, { ImageLoader } from "next/image";
 import { useRouter } from "next/navigation";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
@@ -16,7 +16,7 @@ export default function ImageView({
   const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
 
-  const navigateToImage = (direction: 'prev' | 'next') => {
+  const navigateToImage = useCallback((direction: 'prev' | 'next') => {
     const currentIndex = albumImageMetadata.findIndex(img => img.name === imageName);
     if (currentIndex === -1) return;
 
@@ -28,7 +28,7 @@ export default function ImageView({
     }
     
     router.push(`/${albumName}/${albumImageMetadata[targetIndex].name}`);
-  };
+  }, [albumImageMetadata, albumName, imageName, router]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -59,7 +59,7 @@ export default function ImageView({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [imageName, albumImageMetadata, albumName, router]);
+  }, [imageName, albumImageMetadata, albumName, router, navigateToImage]);
 
   const imagePath = `mj-photos/${albumName}/large/${imageName}`;
 

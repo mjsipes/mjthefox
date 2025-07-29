@@ -1,8 +1,9 @@
 "use client";
 
-import Image, { ImageLoader } from "next/image";
-import supabaseLoader from "@/utils/supabase/supabase-image-loader";
-import PanoramaZoom from "@/components/PanoramaZoom";
+import Image from "next/image";
+// import { ImageLoader } from "next/image";
+// import supabaseLoader from "@/utils/supabase/supabase-image-loader";
+// import PanoramaZoom from "@/components/PanoramaZoom";
 
 export default function Home() {
   return (
