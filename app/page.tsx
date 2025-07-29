@@ -9,7 +9,7 @@ export default function Home() {
     <div className="flex flex-1 flex-col gap-4 p-4">
               <Image
           loader={supabaseLoader as ImageLoader}
-          src={`mj-photos/home/small/pano.jpg`}
+          src={`mj-photos/home/large/pano.jpg`}
           width={1600}
           height={1000}
           quality={90}

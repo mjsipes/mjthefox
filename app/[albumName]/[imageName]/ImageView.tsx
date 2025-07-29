@@ -60,9 +60,8 @@ export default function ImageView({
           width={1600}
           height={1200}
           className="max-w-full max-h-screen object-contain"
-          quality={85}
+          quality={95}
           priority
-          sizes="100vw"
         />
     </div>
   );
