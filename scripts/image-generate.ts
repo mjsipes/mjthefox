@@ -49,7 +49,7 @@ async function main() {
       size: "1024x1024"
     });
 
-    if (!img.data[0]) {
+    if (!img.data || !img.data[0]) {
       throw new Error('No image data received from OpenAI');
     }
 
