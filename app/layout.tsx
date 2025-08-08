@@ -46,6 +46,7 @@ export default function RootLayout({
                 <div className="flex items-center gap-3 px-3">
                   <SidebarTrigger />
                   <ModeToggle />
+                  <div className="border-l border-border h-6 mx-2" />
                   <DynamicBreadcrumb />
                 </div>
               </header>
