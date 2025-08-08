@@ -64,7 +64,7 @@ export default function ImageView({
   const imagePath = `mj-photos/${albumName}/large/${imageName}`;
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4 relative">
+    <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] p-4 relative">
       <div className="absolute left-0 top-0 w-1/3 h-full cursor-w-resize" onClick={() => navigateToImage('prev')} />
       <div className="absolute right-0 top-0 w-1/3 h-full cursor-e-resize" onClick={() => navigateToImage('next')} />
       <Image
@@ -73,7 +73,7 @@ export default function ImageView({
         alt={`${imageName} from ${albumName}`}
         width={1600}
         height={1200}
-        className="max-w-full max-h-screen object-contain invert"
+        className="max-w-full max-h-[calc(100vh-6rem)] object-contain invert"
         quality={95}
         priority
       />

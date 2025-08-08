@@ -8,17 +8,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 items-center justify-center">
-      {/* <Image
-        loader={supabaseLoader as ImageLoader}
-        src={`mj-photos/home/large/pano.jpg`}
-        width={1600}
-        height={1000}
-        quality={85}
-        alt="Switzerland Pano"
-        sizes="100vw"
-        className="w-full h-auto object-cover"
-        priority
-      /> */}
+
       <Image
         src="/favicon.ico"
         alt="fox"
