@@ -1,4 +1,4 @@
-import AlbumGrid from "./AlbumGrid";
+import AlbumGrid from "../../components/AlbumGrid";
 
 export default async function Albums({
   params,

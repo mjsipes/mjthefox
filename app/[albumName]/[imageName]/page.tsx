@@ -1,4 +1,4 @@
-import ImageView from "./ImageView";
+import ImageView from "../../../components/ImageView";
 
 export default async function ImagePage({
   params,
