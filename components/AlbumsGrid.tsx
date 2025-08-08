@@ -60,7 +60,6 @@ export default function AlbumsGrid() {
         <Link
           key={album.name}
           href={`/${album.name}`}
-          className="block bg-white"
         >
           <div className="aspect-video relative">
             <Image
