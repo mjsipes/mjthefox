@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { ImageLoader } from "next/image";
 import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
+import { useInvert } from "@/components/invert-provider";
 
 export default function AlbumGrid({
   albumName,
@@ -15,6 +16,7 @@ export default function AlbumGrid({
 }) {
   const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
+  const { inverted } = useInvert();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -44,7 +46,7 @@ export default function AlbumGrid({
               width={400}
               height={300}
               quality={95}
-              className="object-cover w-full h-auto invert"
+              className={`object-cover w-full h-auto ${inverted ? 'invert' : ''}`}
             />
           </Link>
         ))

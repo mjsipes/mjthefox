@@ -5,6 +5,7 @@ import Image, { ImageLoader } from "next/image";
 import { useRouter } from "next/navigation";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
+import { useInvert } from "@/components/invert-provider";
 
 export default function ImageView({
   albumName,
@@ -15,6 +16,7 @@ export default function ImageView({
 }) {
   const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
+  const { inverted } = useInvert();
 
   const navigateToImage = useCallback((direction: 'prev' | 'next') => {
     const currentIndex = albumImageMetadata.findIndex(img => img.name === imageName);
@@ -75,7 +77,7 @@ export default function ImageView({
         alt={`${imageName} from ${albumName}`}
         width={1600}
         height={1200}
-        className="max-w-full max-h-[calc(100vh-6rem)] object-contain invert"
+        className={`max-w-full max-h-[calc(100vh-6rem)] object-contain ${inverted ? 'invert' : ''}`}
         quality={95}
         priority
       />

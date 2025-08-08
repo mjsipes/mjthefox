@@ -7,6 +7,8 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 import { DynamicBreadcrumb } from "@/components/dynamic-breadcrumb";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
+import { InvertProvider } from "@/components/invert-provider";
+import { InvertToggle } from "@/components/invert-toggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,13 +41,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider>
+          <InvertProvider>
+            <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
               <header className="flex h-16 shrink-0 items-center gap-2 border-b sticky top-0 z-10 bg-background overflow-hidden">
                 <div className="flex items-center gap-3 px-3">
                   <SidebarTrigger />
                   <ModeToggle />
+                  <InvertToggle />
                   <div className="border-l border-border h-6 mx-2" />
                   <DynamicBreadcrumb />
                 </div>
@@ -53,6 +57,7 @@ export default function RootLayout({
               {children}
             </SidebarInset>
           </SidebarProvider>
+          </InvertProvider>
         </ThemeProvider>
       </body>
     </html>

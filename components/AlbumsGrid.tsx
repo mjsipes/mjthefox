@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ImageLoader } from "next/image";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { useAlbumsMetadata } from "@/hooks/use-albums-metadata";
+import { useInvert } from "@/components/invert-provider";
 
 // Album organization matching sidebar structure
 const albumCategories = {
@@ -28,6 +29,7 @@ const albumCategories = {
 
 export default function AlbumsGrid() {
   const { albumsMetadata, loading } = useAlbumsMetadata();
+  const { inverted } = useInvert();
 
   if (loading) {
     return (
@@ -67,7 +69,7 @@ export default function AlbumsGrid() {
               src={album.firstImageUrl}
               alt={`${album.name} album cover`}
               fill
-              className="object-cover"
+              className={`object-cover ${inverted ? 'invert' : ''}`}
             />
           </div>
           <div className="p-4 text-center">
