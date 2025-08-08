@@ -65,8 +65,10 @@ export default function ImageView({
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] p-4 relative">
-      <div className="absolute left-0 top-0 w-1/3 h-full cursor-w-resize" onClick={() => navigateToImage('prev')} />
-      <div className="absolute right-0 top-0 w-1/3 h-full cursor-e-resize" onClick={() => navigateToImage('next')} />
+      <div className="absolute left-0 top-0 w-1/3 h-full cursor-w-resize z-10" onClick={() => navigateToImage('prev')} 
+      />
+      <div className="absolute right-0 top-0 w-1/3 h-full cursor-e-resize z-10" onClick={() => navigateToImage('next')} 
+      />
       <Image
         loader={supabaseLoader as ImageLoader}
         src={imagePath}
