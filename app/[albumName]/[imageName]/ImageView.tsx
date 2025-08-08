@@ -73,7 +73,7 @@ export default function ImageView({
         alt={`${imageName} from ${albumName}`}
         width={1600}
         height={1200}
-        className="max-w-full max-h-screen object-contain"
+        className="max-w-full max-h-screen object-contain invert"
         quality={95}
         priority
       />

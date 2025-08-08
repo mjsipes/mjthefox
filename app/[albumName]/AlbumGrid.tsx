@@ -44,7 +44,7 @@ export default function AlbumGrid({
               width={400}
               height={300}
               quality={95}
-              className="object-cover w-full h-auto"
+              className="object-cover w-full h-auto invert"
             />
           </Link>
         ))

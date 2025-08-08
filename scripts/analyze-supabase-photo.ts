@@ -65,17 +65,6 @@ class SupabasePhotoAnalyzer {
     return data.publicUrl;
   }
 
-  private getMimeType(extension: string): string {
-    const mimeTypes: { [key: string]: string } = {
-      '.jpg': 'image/jpeg',
-      '.jpeg': 'image/jpeg',
-      '.png': 'image/png',
-      '.gif': 'image/gif',
-      '.webp': 'image/webp',
-      '.bmp': 'image/bmp'
-    };
-    return mimeTypes[extension] || 'image/jpeg';
-  }
 
   async getStorageObjectId(storagePath: string): Promise<string> {
     try {

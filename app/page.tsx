@@ -22,7 +22,7 @@ export default function Home() {
       <Image
         src="/favicon.ico"
         alt="fox"
-        className="aspect-square size-8 "
+        className="aspect-square size-8"
         width={32}
         height={32}
         />
