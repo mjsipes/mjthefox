@@ -28,13 +28,10 @@ export default function ImageView({
     ? (currentIndex === albumImageMetadata.length - 1 ? albumImageMetadata[0]?.name : albumImageMetadata[currentIndex + 1]?.name)
     : undefined;
 
-  usePrefetchAlbumImages(albumImageMetadata, {
-    width: 1600,
-  });
-  // Prefetch thumbnails for the album
-  usePrefetchAlbumImages(albumImageMetadata, {
-    width: 400,
-  });
+  // Prefetch large images for instant prev/next navigation
+  usePrefetchAlbumImages(albumImageMetadata, { width: 1600 });
+  // Prefetch thumbnails for when user goes back to album grid
+  usePrefetchAlbumImages(albumImageMetadata, { width: 400 });
 
   const navigateToImage = useCallback((direction: 'prev' | 'next') => {
     const currentIndex = albumImageMetadata.findIndex(img => img.name === imageName);

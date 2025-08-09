@@ -32,7 +32,7 @@ export default function AlbumsGrid() {
   const { albumsMetadata, loading } = useAlbumsMetadata();
   const { inverted } = useInvert();
 
-  // Prefetch all album cover thumbnails for snappy home experience
+  // Prefetch album cover thumbnails for instant home page experience
   const coverMetadata = albumsMetadata.map((a) => ({ name: a.name, url: a.firstImageUrl }));
   usePrefetchAlbumImages(coverMetadata, { width: 400 });
 

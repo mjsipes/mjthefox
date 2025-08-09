@@ -9,7 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
 import { InvertProvider } from "@/components/invert-provider";
 import { InvertToggle } from "@/components/invert-toggle";
-import GlobalThumbnailPrefetcher from "@/components/GlobalThumbnailPrefetcher";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,7 +43,6 @@ export default function RootLayout({
         >
           <InvertProvider>
             <SidebarProvider>
-            <GlobalThumbnailPrefetcher />
             <AppSidebar />
             <SidebarInset>
               <header className="flex h-16 shrink-0 items-center gap-2 border-b sticky top-0 z-10 bg-background overflow-hidden">

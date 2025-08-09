@@ -18,13 +18,10 @@ export default function AlbumGrid({
   const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
   const { inverted } = useInvert();
-  usePrefetchAlbumImages(albumImageMetadata, {
-    width: 1600,
-  });
-  // Prefetch thumbnails to make grid renders and revisits instant
-  usePrefetchAlbumImages(albumImageMetadata, {
-    width: 400,
-  });
+  // Prefetch large images for instant navigation within album
+  usePrefetchAlbumImages(albumImageMetadata, { width: 1600 });
+  // Prefetch thumbnails for fast grid renders and revisits
+  usePrefetchAlbumImages(albumImageMetadata, { width: 400 });
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
