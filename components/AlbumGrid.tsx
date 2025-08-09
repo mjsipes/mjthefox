@@ -8,6 +8,7 @@ import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { ImageLoader } from "next/image";
 import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
 import { useInvert } from "@/components/invert-provider";
+import { usePrefetchAlbumImages } from "@/hooks/use-prefetch-album-images";
 
 export default function AlbumGrid({
   albumName,
@@ -17,6 +18,16 @@ export default function AlbumGrid({
   const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
   const { inverted } = useInvert();
+  const firstImageName = albumImageMetadata[0]?.name;
+  usePrefetchAlbumImages(albumImageMetadata, {
+    width: 1600,
+    prioritize: firstImageName ? [firstImageName] : [],
+  });
+  // Prefetch thumbnails to make grid renders and revisits instant
+  usePrefetchAlbumImages(albumImageMetadata, {
+    width: 400,
+    prioritize: firstImageName ? [firstImageName] : [],
+  });
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

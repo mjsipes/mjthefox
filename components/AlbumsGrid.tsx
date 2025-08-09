@@ -6,6 +6,7 @@ import { ImageLoader } from "next/image";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { useAlbumsMetadata } from "@/hooks/use-albums-metadata";
 import { useInvert } from "@/components/invert-provider";
+import { usePrefetchAlbumImages } from "@/hooks/use-prefetch-album-images";
 
 // Album organization matching sidebar structure
 const albumCategories = {
@@ -30,6 +31,10 @@ const albumCategories = {
 export default function AlbumsGrid() {
   const { albumsMetadata, loading } = useAlbumsMetadata();
   const { inverted } = useInvert();
+
+  // Prefetch all album cover thumbnails for snappy home experience
+  const coverMetadata = albumsMetadata.map((a) => ({ name: a.name, url: a.firstImageUrl }));
+  usePrefetchAlbumImages(coverMetadata, { width: 400 });
 
   if (loading) {
     return (

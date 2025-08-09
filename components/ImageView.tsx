@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
 import { useInvert } from "@/components/invert-provider";
+import { usePrefetchAlbumImages } from "@/hooks/use-prefetch-album-images";
 
 export default function ImageView({
   albumName,
@@ -17,6 +18,25 @@ export default function ImageView({
   const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
   const { inverted } = useInvert();
+
+  // Determine next/prev image names to prioritize their prefetch
+  const currentIndex = albumImageMetadata.findIndex(img => img.name === imageName);
+  const prevName = currentIndex > -1
+    ? (currentIndex === 0 ? albumImageMetadata[albumImageMetadata.length - 1]?.name : albumImageMetadata[currentIndex - 1]?.name)
+    : undefined;
+  const nextName = currentIndex > -1
+    ? (currentIndex === albumImageMetadata.length - 1 ? albumImageMetadata[0]?.name : albumImageMetadata[currentIndex + 1]?.name)
+    : undefined;
+
+  usePrefetchAlbumImages(albumImageMetadata, {
+    width: 1600,
+    prioritize: [prevName, nextName].filter(Boolean) as string[],
+  });
+  // Prefetch thumbnails for the album
+  usePrefetchAlbumImages(albumImageMetadata, {
+    width: 400,
+    prioritize: [prevName, nextName].filter(Boolean) as string[],
+  });
 
   const navigateToImage = useCallback((direction: 'prev' | 'next') => {
     const currentIndex = albumImageMetadata.findIndex(img => img.name === imageName);
