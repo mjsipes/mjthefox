@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/components/ui/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
-import { DynamicBreadcrumb } from "@/components/dynamic-breadcrumb";
+import { DynamicBreadcrumb } from "@/components/ui/dynamic-breadcrumb";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
-import { InvertProvider } from "@/components/invert-provider";
+import { InvertProvider } from "@/components/ui/invert-provider";
 import { InvertToggle } from "@/components/invert-toggle";
 
 

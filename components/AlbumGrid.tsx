@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { ImageLoader } from "next/image";
 import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
-import { useInvert } from "@/components/invert-provider";
+import { useInvert } from "@/components/ui/invert-provider";
 import { usePrefetchAlbumImages } from "@/hooks/use-prefetch-album-images";
 
 export default function AlbumGrid({

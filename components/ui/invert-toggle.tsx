@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Eye, EyeOff } from "lucide-react"
-import { useInvert } from "@/components/invert-provider"
+import { useInvert } from "@/components/ui/invert-provider"
 
 import { Button } from "@/components/ui/button"
 
