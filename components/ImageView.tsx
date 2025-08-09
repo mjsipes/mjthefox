@@ -30,12 +30,10 @@ export default function ImageView({
 
   usePrefetchAlbumImages(albumImageMetadata, {
     width: 1600,
-    prioritize: [prevName, nextName].filter(Boolean) as string[],
   });
   // Prefetch thumbnails for the album
   usePrefetchAlbumImages(albumImageMetadata, {
     width: 400,
-    prioritize: [prevName, nextName].filter(Boolean) as string[],
   });
 
   const navigateToImage = useCallback((direction: 'prev' | 'next') => {

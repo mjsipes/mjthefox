@@ -18,15 +18,12 @@ export default function AlbumGrid({
   const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
   const { inverted } = useInvert();
-  const firstImageName = albumImageMetadata[0]?.name;
   usePrefetchAlbumImages(albumImageMetadata, {
     width: 1600,
-    prioritize: firstImageName ? [firstImageName] : [],
   });
   // Prefetch thumbnails to make grid renders and revisits instant
   usePrefetchAlbumImages(albumImageMetadata, {
     width: 400,
-    prioritize: firstImageName ? [firstImageName] : [],
   });
 
   useEffect(() => {

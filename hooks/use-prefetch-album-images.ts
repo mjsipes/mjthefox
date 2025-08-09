@@ -7,11 +7,10 @@ type AlbumImageMetadata = { name: string; url: string };
 
 export function usePrefetchAlbumImages(
   albumImageMetadata: AlbumImageMetadata[],
-  options?: { width?: number; quality?: number; prioritize?: string[] }
+  options?: { width?: number; quality?: number }
 ) {
   const targetWidth = Math.min(options?.width ?? 1600, 2400);
   const targetQuality = options?.quality ?? 95;
-  const prioritizedNames = options?.prioritize ?? [];
 
   useEffect(() => {
     if (!albumImageMetadata || albumImageMetadata.length === 0) return;
@@ -23,19 +22,8 @@ export function usePrefetchAlbumImages(
       Math.round(Math.min(targetWidth * dpr, 2400)),
     ])).filter(Boolean) as number[];
 
-    const byName = new Map(albumImageMetadata.map((m) => [m.name, m]));
-    const prioritized = prioritizedNames
-      .map((n) => byName.get(n))
-      .filter(Boolean) as AlbumImageMetadata[];
-    const rest = albumImageMetadata.filter((m) => !prioritizedNames.includes(m.name));
-
-    const prefetchList: { meta: AlbumImageMetadata; priority: 'high' | 'low' }[] = [
-      ...prioritized.map((m) => ({ meta: m, priority: 'high' as const })),
-      ...rest.map((m) => ({ meta: m, priority: 'low' as const })),
-    ];
-
     // Fire-and-forget image prefetch using the same loader as <Image />
-    prefetchList.forEach(({ meta, priority }) => {
+    albumImageMetadata.forEach((meta) => {
       widths.forEach((w) => {
         const url = supabaseLoader({
           src: meta.url,
@@ -44,12 +32,12 @@ export function usePrefetchAlbumImages(
         } as any);
         const img = new Image();
         img.decoding = "async";
-        (img as any).fetchPriority = priority;
+        (img as any).fetchPriority = 'low';
         img.loading = "eager";
         img.src = url;
       });
     });
-  }, [albumImageMetadata, prioritizedNames, targetQuality, targetWidth]);
+  }, [albumImageMetadata, targetQuality, targetWidth]);
 }
 
 
