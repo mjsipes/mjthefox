@@ -5,10 +5,10 @@ import { AppSidebar } from "@/components/ui/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 import { DynamicBreadcrumb } from "@/components/ui/dynamic-breadcrumb";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/mode-toggle";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import { InvertProvider } from "@/components/ui/invert-provider";
-import { InvertToggle } from "@/components/invert-toggle";
+import { InvertToggle } from "@/components/ui/invert-toggle";
 
 
 const geistSans = Geist({
