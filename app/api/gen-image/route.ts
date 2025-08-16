@@ -5,6 +5,8 @@ import { cookies } from "next/headers";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const name = searchParams.get('name') || 'World';
+  console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY);
+
   
   try {
     const cookieStore = await cookies();
