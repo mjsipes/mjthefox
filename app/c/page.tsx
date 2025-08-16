@@ -12,7 +12,7 @@ import ZoomablePanImage from "@/components/zoomable-pan-image";
 //     "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/project-nuance/IMG_7067.jpg",
 //   ];
 
-  const image = "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/project-nuance/small/1-IMG_8466.jpg"
+  const image = "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/project-nuance/small/2-IMG_6730.jpg"
 
 
   export default function C() {

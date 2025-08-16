@@ -8,8 +8,8 @@ import Image from "next/image";
 // ];
 
 const images2 = [
-    "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/project-nuance/IMG_7066.jpg",
-    "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/project-nuance/IMG_7067.jpg",
+    "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/project-nuance/small/1-IMG_6424.jpg",
+    "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/project-nuance/small/2-IMG_6730.jpg",
   ];
 
 export default function A() {

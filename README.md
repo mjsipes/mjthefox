@@ -62,3 +62,45 @@ Optional: set your Supabase bucket name to `mj-photos` or update references acco
 - Smarter prefetch strategies per album/device
 - Progressive enhancements for low-bandwidth scenarios
 - Feature parity with Squarespace galleries, then surpass it
+
+
+
+van gogh
+monet
+andy warhol
+pablo picasso
+
+- Vincent van Gogh
+- Claude Monet
+- Andy Warhol
+- Pablo Picasso
+- Leonardo da Vinci
+- Michelangelo
+- Raphael
+- Sandro Botticelli
+- Rembrandt van Rijn
+- Johannes Vermeer
+- Caravaggio
+- Titian
+- Diego Velázquez
+- Francisco Goya
+- Édouard Manet
+- Edgar Degas
+- Pierre-Auguste Renoir
+- Paul Cézanne
+- Paul Gauguin
+- Henri Matisse
+- Georges Seurat
+- Gustav Klimt
+- Egon Schiele
+- Edvard Munch
+- Amedeo Modigliani
+- Piet Mondrian
+- Wassily Kandinsky
+- Joan Miró
+- Salvador Dalí
+- René Magritte
+- Frida Kahlo
+- Georgia O’Keeffe
+- Jackson Pollock
+- Mark Rothko
