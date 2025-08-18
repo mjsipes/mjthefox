@@ -1,20 +1,23 @@
 import { NextResponse } from "next/server";
 import { getSupabasePhotos } from "../test/route";
+import OpenAI from "openai";
+
+const client = new OpenAI();
 
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const name = searchParams.get('name') || 'World';
+  const prompt = searchParams.get('prompt') || 'World';
   
-  const [photosResult] = await Promise.all([
-    getSupabasePhotos(),
-  ]);
-
+  const img = await client.images.generate({
+    model: "gpt-image-1",
+    prompt: prompt,
+    n: 1,
+    size: "1024x1024",
+  });
+  console.log('Image:', img);
   return NextResponse.json({
-    message: `Hello ${name}!`,
-    photos: photosResult.images,
-    errors: {
-      photos: photosResult.error,
-    }
+    message: `Hello ${prompt}!`,
+    image: img.data?.[0]?.url,
   });
 }
