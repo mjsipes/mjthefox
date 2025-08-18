@@ -33,5 +33,5 @@ export async function GET(request: Request) {
   const photosResult = await getSupabasePhotos();
   console.log('Photos result:', photosResult);
   
-  return NextResponse.json({ message: "Hello World" });
+  return NextResponse.json({ message: "test", results:photosResult });
 }
