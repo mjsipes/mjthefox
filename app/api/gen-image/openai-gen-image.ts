@@ -1,10 +1,8 @@
 // node --env-file=.env --import=tsx app/api/gen-image/openai-gen-image.ts
-
 import OpenAI from "openai";
 
-const client = new OpenAI();
 
-export async function openaiGenImage(prompt: string = "World") {
+export async function openaiGenImage(prompt: string = "World", client: OpenAI) {
   const img = await client.images.generate({
     model: "gpt-image-1",
     prompt,
