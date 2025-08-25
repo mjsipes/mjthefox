@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 
 // Mini function: Get Supabase photos
-export async function getSupabasePhotos(folder: string = 'celestial/large') {
+async function getSupabasePhotos(folder: string = 'celestial/large') {
   try {
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
