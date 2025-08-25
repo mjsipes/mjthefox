@@ -1,13 +1,6 @@
-// node --env-file=.env --import=tsx app/api/gen-image/openai-gen-image.ts
-import { writeFile } from "fs/promises";
-import OpenAI, { toFile } from "openai";
-import fs from "fs";
+import OpenAI from "openai";
 import { uploadB64ImageToSupabase } from "./supabase-functions";
 import { SupabaseClient } from "@supabase/supabase-js";
-
-
-
-
 
 export async function image_url_to_text(openai: OpenAI, image_url: string) {
   console.log("image_url_to_text url:", image_url);
@@ -30,6 +23,32 @@ export async function image_url_to_text(openai: OpenAI, image_url: string) {
   });
   console.log("image_url_to_text response:", response.output_text);
   return response.output_text;
+}
+
+export async function create_image_with_images_generate(
+  prompt: string,
+  client: OpenAI,
+  supabase: SupabaseClient
+) {
+  console.log("create_image_with_images_generate prompt:", prompt);
+  const img = await client.images.generate({
+    model: "dall-e-3",
+    prompt: prompt,
+    n: 1,
+    size: "1024x1024",
+    response_format: "b64_json",
+  });
+  console.log("create_image_with_images_generate img:", img);
+
+  const image_base64 = img.data?.[0]?.b64_json;
+  if (image_base64) {
+    const filename = `dalle3-${Date.now()}`;
+    const uploadResponse = await uploadB64ImageToSupabase(supabase, filename, image_base64);
+    if (uploadResponse) {
+      const { data } = supabase.storage.from("mj-photos").getPublicUrl(uploadResponse.path);
+      console.log("create_image_with_images_generate image url:", data.publicUrl);
+    }
+  }
 }
 
 // https://platform.openai.com/docs/guides/tools-image-generation
@@ -64,33 +83,6 @@ export async function create_image_with_responses(
     }
   }
 }
-
-export async function create_image_with_images_generate(
-  prompt: string,
-  client: OpenAI,
-  supabase: SupabaseClient
-) {
-  console.log("create_image_with_images_generate prompt:", prompt);
-  const img = await client.images.generate({
-    model: "dall-e-3",
-    prompt: prompt,
-    n: 1,
-    size: "1024x1024",
-    response_format: "b64_json",
-  });
-  console.log("create_image_with_images_generate img:", img);
-
-  const image_base64 = img.data?.[0]?.b64_json;
-  if (image_base64) {
-    const filename = `dalle3-${Date.now()}`;
-    const uploadResponse = await uploadB64ImageToSupabase(supabase, filename, image_base64);
-    if (uploadResponse) {
-      const { data } = supabase.storage.from("mj-photos").getPublicUrl(uploadResponse.path);
-      console.log("create_image_with_images_generate image url:", data.publicUrl);
-    }
-  }
-}
-
 
 type ImageRef = { bucket: string; path: string };
 export async function create_image_edit_with_responses(
