@@ -91,53 +91,68 @@ export async function create_image_with_images_generate(
   }
 }
 
-export async function create_image_edit(
-  client: OpenAI,
-  supabase: SupabaseClient
-) {
-  console.log("creating image edit");
-  const imageFiles = ["horse.jpg"];
 
-  const images = await Promise.all(
-    imageFiles.map(
-      async (file) =>
-        await toFile(fs.createReadStream(file), null, {
-          type: "image/png",
-        })
-    )
+type ImageRef = { bucket: string; path: string };
+export async function create_image_edit_with_responses(
+  client: OpenAI,
+  supabase: SupabaseClient,
+  prompt: string,
+  refs: ImageRef[],
+) {
+  if (!refs.length) throw new Error("No input images provided.");
+
+  // 1) Download refs from Supabase -> data URLs (no temp files)
+  const dataUrls = await Promise.all(
+    refs.map(async ({ bucket, path }) => {
+      const { data: blob, error } = await supabase.storage.from(bucket).download(path);
+      if (error || !blob) {
+        throw new Error(`Download failed for ${bucket}/${path}: ${error?.message || "unknown"}`);
+      }
+      const ab = await blob.arrayBuffer();
+      const b64 = Buffer.from(ab).toString("base64");
+      const mime = blob.type && blob.type.length > 0 ? blob.type : "image/png";
+      console.log("create_image_edit_with_responses mime:", mime);
+      return `data:${mime};base64,${b64}`;
+    })
   );
 
-  const rsp = await client.images.edit({
-    model: "gpt-image-1",
-    image: images,
-    prompt: "turn this into a watercolor painting",
+  // 2) Call Responses API with image_generation tool
+  const response = await client.responses.create({
+    model: "gpt-4.1",
+    input: [{ 
+      role: "user", 
+      content: [
+        { type: "input_text", text: prompt },
+        ...dataUrls.map((image_url) => ({ type: "input_image" as const, image_url, detail: "high" as const })),
+      ]
+    }],
+    tools: [{ type: "image_generation" }],
   });
 
-  const image_base64 = rsp.data?.[0]?.b64_json;
-  if (image_base64) {
-    const filename = `gpt-image-1-${Date.now()}`;
-    const uploadResponse = await uploadB64ImageToSupabase(supabase, filename, image_base64);
+  // 4) Align with your exact extraction pattern
+  const imageData = response.output
+    .filter((output: any) => output.type === "image_generation_call")
+    .map((output: any) => output.result)
+    .filter((result: unknown): result is string => result !== null);
+
+  if (imageData.length > 0) {
+    const imageBase64 = imageData[0]; // guaranteed string by the filter
+    const filename = `gpt4-responses-${Date.now()}`;
+    const uploadResponse = await uploadB64ImageToSupabase(
+      supabase,
+      filename,
+      imageBase64
+    );
     if (uploadResponse) {
-      const { data } = supabase.storage.from("mj-photos").getPublicUrl(uploadResponse.path);
-      console.log("create_image_edit image url:", data.publicUrl);
+      const { data } = supabase.storage
+        .from("mj-photos")
+        .getPublicUrl(uploadResponse.path);
+      console.log("create_image_with_responses image url:", data.publicUrl);
+      return { path: uploadResponse.path, publicUrl: data.publicUrl };
     }
+  } else {
+    // If the model responded with text instead of an image, surface it
+    const msg = response.output?.map((o: any) => o.content || "").join("\n");
+    throw new Error(`No image returned. Model said: ${msg || "(no content)"}`);
   }
-}
-
-//model: "gpt-image-1"
-export async function openaiGenImage_deprecated(
-  prompt: string = "World",
-  client: OpenAI
-) {
-  const img = await client.images.generate({
-    model: "gpt-image-1",
-    prompt,
-    n: 1,
-    size: "1024x1024",
-  });
-  console.log("Image:", img);
-  return {
-    message: `Hello ${prompt}!`,
-    image: img.data?.[0]?.url,
-  };
 }

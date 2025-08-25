@@ -22,32 +22,36 @@ export function useAlbumImagesMetadata(albumName: string) {
       const cachedMetadata = JSON.parse(cached);
       setAlbumImageMetadata(cachedMetadata);
     } else {
-      const supabase = createClient();
-      supabase.storage
-        .from("mj-photos")
-        .list(`${albumName}/large`)
-        .then(({ data, error }) => {
-          if (error) {
-            console.error("Storage Error:", error);
-          }
-  
-          const metadata = (data || [])
-            .map((item) => ({
-              name: item.name,
-              url: `mj-photos/${albumName}/large/${item.name}`,
-            }))
-            .sort((a, b) => {
-              const getLeadingNumber = (filename: string) => {
-                const match = filename.match(/^(\d+)-/);
-                return match ? parseInt(match[1], 10) : 0;
-              };
-  
-              return getLeadingNumber(a.name) - getLeadingNumber(b.name);
-            });
-  
-          setAlbumImageMetadata(metadata);
-          sessionStorage.setItem(`album-grid-${albumName}`, JSON.stringify(metadata));
-        });
+      const fetchAlbumImages = async () => {
+        const supabase = createClient();
+        const { data, error } = await supabase.storage
+          .from("mj-photos")
+          .list(`${albumName}/large`);
+
+        if (error) {
+          console.error("Storage Error:", error);
+          return;
+        }
+
+        const metadata = (data || [])
+          .map((item) => ({
+            name: item.name,
+            url: `mj-photos/${albumName}/large/${item.name}`,
+          }))
+          .sort((a, b) => {
+            const getLeadingNumber = (filename: string) => {
+              const match = filename.match(/^(\d+)-/);
+              return match ? parseInt(match[1], 10) : 0;
+            };
+
+            return getLeadingNumber(a.name) - getLeadingNumber(b.name);
+          });
+
+        setAlbumImageMetadata(metadata);
+        sessionStorage.setItem(`album-grid-${albumName}`, JSON.stringify(metadata));
+      };
+
+      fetchAlbumImages();
     }
   }, [albumName]);
   

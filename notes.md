@@ -28,4 +28,4 @@ should really understand chatgpt image apis, not just confusing chatgpt slop.
 learn to build.
 
 # today
-then figure out how to input supabase urls as input, then have it download and put into the functions
+then figure out how to input imagealbum/imagename input, then have it download and put into the functions

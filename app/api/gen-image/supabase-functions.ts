@@ -27,6 +27,7 @@ export async function getSupabaseImages(supabase: SupabaseClient) {
   const { data } = await supabase.storage
     .from('mj-photos')
     .list('celestial/large');
+  console.log("getSupabaseImages data:", data)
   return data;
 }
 
