@@ -7,25 +7,20 @@ add custom components
 
 ## technical
 best way to serve (width, quality, staticprops, prefetching)
-
 squarespace store?
 
 ## todo
-this is fucking rediculous the goal is havea script where i can put in an image url and prompt and get a varaition to generate, save to ai bucket, and save metadata as a parent
-then i also need 
-little functions. 
-image url -> image id.
-image id -> image url
-image id -> all children
-image id -> root parent
-for every image.
-for every image in a folder
+create image edit with images endpoint
+create image variation with images endpoint.
+see if all models are accesible from both endpoints / try to figure out if they are different and which one is better
+see if vercel has image generation/edit endpoints through their apis.
+
+save metadata as a parent
+
+image name/album <-> image id <-> image url
+image -> all children
+image -> root parent
+
+
 for all images, check if they have metadata, otherwise create a metadata row
 for all metadata rows, if no description, generate description
-
-should really understand chatgpt image apis, not just confusing chatgpt slop.
-
-learn to build.
-
-# today
-then figure out how to input imagealbum/imagename input, then have it download and put into the functions
