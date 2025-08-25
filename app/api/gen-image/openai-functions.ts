@@ -63,6 +63,7 @@ export async function create_image_with_responses(
     input: prompt,
     tools: [{ type: "image_generation" }],
   });
+  console.log("create_image_with_responses response:", response);
 
   const imageData = response.output
     .filter((output) => output.type === "image_generation_call")
