@@ -31,7 +31,7 @@ export default function AlbumGrid({
   }, [router]);
 
   return (
-    <div className="grid grid-cols-2 gap-4 p-4">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
       {
         albumImageMetadata.map((item, i) => (
           <Link
@@ -43,8 +43,8 @@ export default function AlbumGrid({
               loader={supabaseLoader as ImageLoader}
               src={item.url}
               alt={`Image ${i + 1}`}
-              width={400}
-              height={300}
+              width={800}
+              height={600}
               quality={95}
               className={`object-cover w-full h-auto ${inverted ? 'invert' : ''}`}
             />
