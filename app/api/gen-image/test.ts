@@ -1,14 +1,14 @@
-// npx tsx --env-file=.env app/api/gen-image/test.ts "A tiny turtle on a surfboard"
-// node --env-file=.env --import=tsx app/api/gen-image/test.ts "A tiny turtle on a surfboard"
+// npx tsx --env-file=.env --env-file=.env.local app/api/gen-image/test.ts "A tiny turtle on a surfboard"
+// node --env-file=.env --env-file=.env.local --import=tsx app/api/gen-image/test.ts "A tiny turtle on a surfboard"
 
 import OpenAI from "openai";
-import { openaiGenImage } from "./openai-functions";
+import { openaiGenImage_deprecated } from "./openai-functions";
 import { createClient } from "@supabase/supabase-js";
 import { getSupabaseImages } from "./supabase-functions";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { generate_image_with_responses } from "./openai-functions";
-import { images_as_input } from "./openai-functions";
-import { create_image } from "./openai-functions";
+import { create_image_with_responses } from "./openai-functions";
+import { image_url_to_text } from "./openai-functions";
+import { create_image_with_images_generate } from "./openai-functions";
 import {create_image_edit} from "./openai-functions";
 import { uploadLocalJpgToSupabase } from "./supabase-functions";
 const prompt = process.argv[2] || "World";
@@ -32,8 +32,8 @@ async function url_to_id(url: string, supabase: SupabaseClient) {
 }
 async function id_to_url(id: string, supabase: SupabaseClient) {}
 
-// generate_image_with_responses(prompt, client);
-// images_as_input(client);
-// create_image(prompt, client);
-create_image_edit(client,supabase);
-// openaiGenImage(prompt, client);
+create_image_with_responses(prompt, client, supabase);
+image_url_to_text(client, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/new-zealand/large/8-IMG_0416.jpg");
+// create_image_with_images_generate(prompt, client, supabase);
+// create_image_edit(client,supabase);
+// openaiGenImage_deprecated(prompt, client);
