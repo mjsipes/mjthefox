@@ -2,7 +2,7 @@
 
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
-import {create_image_edit_with_responses, create_image_with_images_generate, create_image_with_responses} from "./openai-functions";
+import {create_image_edit_with_responses, create_image_with_images_generate, create_image_with_responses, create_image_edit_with_images_api} from "./openai-functions";
 
 const client = new OpenAI();
 const supabase = createClient(
@@ -13,9 +13,14 @@ const prompt = "please create an artistic illustration of the following descript
 
 // image_url_to_text(client, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/new-zealand/large/8-IMG_0416.jpg");
 
-create_image_with_responses(prompt, client, supabase);
+// create_image_with_responses(prompt, client, supabase);
 // create_image_with_images_generate(prompt, client, supabase);
 
 // create_image_edit_with_responses(client, supabase, "transform into watercolor painting: ", [
 //   { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
 // ]);
+
+
+create_image_edit_with_images_api(client, supabase, "transform into watercolor painting: ", [
+  { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
+]);

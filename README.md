@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# mjthefox.com 🎨🎵
 
-## Getting Started
+**Live App: https://drawtunes.vercel.app/**
+https://mjthefox.vercel.app/
+https://mjthefox.com/
+https://gar-bassoon-8hk7.squarespace.com/
 
-First, run the development server:
+## The Journey Behind the Tech
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+4 years ago i created a photo website
+now it is my coming of age / time to create from scratch
+used nextjs / supabase
+image quality and size versus image speed tradeoff
+-supabase transformations / nextjs Image components / supabase nextjs image loader
+-prefetching html versus remote links, getstaticprops, squarespace does a great job at this, hard to replicate and not good documentation online for best practices. struggled with trying to use the framework versus going rogue
+- openai images versus responses endpoint
+- caching in browser / network tab / hard reloads
+- image format / using file system . basae64.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+?vercel image endpoint / midjounrey image endpoints
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+creating a nondestructive database that grows with my project. we do not know how this app will transform, but never deleting from the database ex? large and small.
+prefetching
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+cool idea of style transfer for images
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend**: Built with [NextJS](https://nextjs.org/)
+- **Styling**: Designed with [Tailwind CSS](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com)
+- **Backend**: Powered by [Supabase](https://supabase.com) (PostgreSQL + Storage)
+- **APIs**: OpenAI API Images and Responses API
+- **Hosting**: Deployed on [Vercel](https://vercel.com)
 
-## Deploy on Vercel
+## Technical Challenges & Solutions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Personal Takeaways
+

@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { toFile } from "openai";
 import { uploadB64ImageToSupabase } from "./supabase-functions";
 import { SupabaseClient } from "@supabase/supabase-js";
 
@@ -42,7 +43,7 @@ export async function create_image_with_images_generate(
 
   const image_base64 = img.data?.[0]?.b64_json;
   if (image_base64) {
-    const filename = `dalle3-${Date.now()}`;
+    const filename = `${Date.now()}`;
     const uploadResponse = await uploadB64ImageToSupabase(supabase, filename, image_base64);
     if (uploadResponse) {
       const { data } = supabase.storage.from("mj-photos").getPublicUrl(uploadResponse.path);
@@ -72,7 +73,7 @@ export async function create_image_with_responses(
 
   if (imageData.length > 0) {
     const imageBase64 = imageData[0]; // now guaranteed string
-    const filename = `gpt4-responses-${Date.now()}`;
+    const filename = `${Date.now()}`;
     const uploadResponse = await uploadB64ImageToSupabase(
       supabase,
       filename,
@@ -130,7 +131,7 @@ export async function create_image_edit_with_responses(
 
   if (imageData.length > 0) {
     const imageBase64 = imageData[0]; // guaranteed string by the filter
-    const filename = `gpt4-responses-${Date.now()}`;
+    const filename = `${Date.now()}`;
     const uploadResponse = await uploadB64ImageToSupabase(
       supabase,
       filename,
@@ -148,4 +149,56 @@ export async function create_image_edit_with_responses(
     const msg = response.output?.map((o: any) => o.content || "").join("\n");
     throw new Error(`No image returned. Model said: ${msg || "(no content)"}`);
   }
+}
+
+export async function create_image_edit_with_images_api(
+  client: OpenAI,
+  supabase: SupabaseClient,
+  prompt: string,
+  refs: ImageRef[],
+) {
+  if (!refs.length) throw new Error("No input images provided.");
+
+  // 1) Download refs from Supabase -> Files (no temp files)
+  const files = await Promise.all(
+    refs.map(async ({ bucket, path }) => {
+      const { data: blob, error } = await supabase.storage.from(bucket).download(path);
+      if (error || !blob) {
+        throw new Error(`Download failed for ${bucket}/${path}: ${error?.message || "unknown"}`);
+      }
+      const ab = await blob.arrayBuffer();
+      const mime = blob.type && blob.type.length > 0 ? blob.type : "image/png";
+      const filename = path.split("/").pop() || "input.png";
+      return await toFile(new Blob([ab], { type: mime }), filename, { type: mime });
+    })
+  );
+
+  // 2) Call Images API
+  const response = await client.images.edit({
+    model: "gpt-image-1",
+    image: files,
+    prompt,
+    size: "1536x1024",
+  });
+
+  // 3) Upload to Supabase
+  const image_base64 = response.data?.[0]?.b64_json;
+  if (!image_base64) throw new Error("No image returned from Images API.");
+
+  const filename = `${Date.now()}.png`;
+  const bytes = Buffer.from(image_base64, "base64");
+  const { data: uploaded, error: upErr } = await supabase.storage
+    .from("mj-photos")
+    .upload(filename, bytes, {
+      contentType: "image/png",
+    });
+
+  if (upErr || !uploaded) {
+    throw new Error(`Upload failed: ${upErr?.message || "unknown"}`);
+  }
+
+  const { data } = supabase.storage.from("mj-photos").getPublicUrl(uploaded.path);
+  console.log("create_image_edit_with_images_api image url:", data.publicUrl);
+
+  return { path: uploaded.path, publicUrl: data.publicUrl };
 }
