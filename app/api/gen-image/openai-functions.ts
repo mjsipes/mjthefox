@@ -33,11 +33,11 @@ export async function create_image_with_images_generate(
 ) {
   console.log("create_image_with_images_generate prompt:", prompt);
   const img = await client.images.generate({
-    model: "dall-e-3",
+    model: "gpt-image-1",
     prompt: prompt,
     n: 1,
-    size: "1024x1024",
-    response_format: "b64_json",
+    size: "1536x1024",
+    // response_format: "b64_json",
   });
   console.log("create_image_with_images_generate img:", img);
 
