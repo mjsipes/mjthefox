@@ -16,12 +16,12 @@ const prompt = "please draw: This image appears to be a highly stylized, pop art
 // create_image_with_images_generate(prompt, client, supabase);
 // create_image_with_responses(prompt, client, supabase);
 
-// create_image_edit_with_images_api(client, supabase, "transform into style of picasso: ", [
+create_image_edit_with_images_api(client, supabase, "transform into style of Frida Kahlo: ", [
+  { bucket: "mj-photos", path: "kauai/large/1-IMG_0941.jpg" },
+]);
+// create_image_edit_with_responses(client, supabase, "transform into style of monet: ", [
 //   { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
 // ]);
-create_image_edit_with_responses(client, supabase, "transform into style of monet: ", [
-  { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
-]);
 
 // getImageId_from_url(supabase, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/ai/basket.png");
 // getImageId_from_image_path(supabase, "mj-photos", "ai/basket.png");

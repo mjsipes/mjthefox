@@ -6,7 +6,6 @@ export async function uploadB64ImageToSupabase(
   supabase: SupabaseClient,
   filename: string,
   base64: string,
-  parent_id: string | null = null
 ) {
   console.log("uploadB64ImageToSupabase filename:", filename)
   const buffer = Buffer.from(base64, "base64");
@@ -21,14 +20,6 @@ export async function uploadB64ImageToSupabase(
     return null;
   }
   console.log("uploadB64ImageToSupabase data:", data)
-  const {data: data1,error: error1} = await supabase.from("image_metadata").insert({
-    image_id: data.id,
-    parent_id: parent_id,
-  }).select("*");
-  if (error1) {
-    console.error("uploadB64ImageToSupabase metadata error:", error1);
-  }
-  console.log("uploadB64ImageToSupabase metadata data:", data1)
   return data;
 }
 

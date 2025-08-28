@@ -19,16 +19,19 @@ export type Database = {
           description: string | null
           image_id: string
           parent_id: string | null
+          style: string | null
         }
         Insert: {
           description?: string | null
           image_id?: string
           parent_id?: string | null
+          style?: string | null
         }
         Update: {
           description?: string | null
           image_id?: string
           parent_id?: string | null
+          style?: string | null
         }
         Relationships: []
       }
@@ -52,11 +55,44 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      count_images_without_small: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       get_all_children: {
         Args: { input_id: string }
         Returns: {
           image_id: string
         }[]
+      }
+      get_all_images_without_metadata: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          bucket_id: string
+          created_at: string
+          image_id: string
+          name: string
+        }[]
+      }
+      get_all_large_images_without_metadata: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          bucket_id: string
+          created_at: string
+          image_id: string
+          name: string
+        }[]
+      }
+      get_image_bucket_and_path_from_image_id: {
+        Args: { image_id: string }
+        Returns: {
+          bucket_id: string
+          name: string
+        }[]
+      }
+      get_image_id_from_image_path: {
+        Args: { image_bucket: string; image_path: string }
+        Returns: string
       }
       get_root_image: {
         Args: { input_id: string }
@@ -68,7 +104,13 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      artist:
+        | "Andy Warhol"
+        | "Frida Kahlo"
+        | "Henri Matisse"
+        | "Pablo Picasso"
+        | "Salvador Dalí"
+        | "Vincent van Gogh"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -195,6 +237,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      artist: [
+        "Andy Warhol",
+        "Frida Kahlo",
+        "Henri Matisse",
+        "Pablo Picasso",
+        "Salvador Dalí",
+        "Vincent van Gogh",
+      ],
+    },
   },
 } as const

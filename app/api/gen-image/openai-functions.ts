@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { toFile } from "openai";
-import { getImageId_from_image_path, uploadB64ImageToSupabase } from "./supabase-functions";
+import { uploadB64ImageToSupabase } from "./supabase-functions";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export async function image_url_to_text(openai: OpenAI, image_url: string) {
@@ -132,12 +132,10 @@ export async function create_image_edit_with_responses(
   if (imageData.length > 0) {
     const imageBase64 = imageData[0]; // guaranteed string by the filter
     const filename = `${Date.now()}`;
-    const parent_id = await getImageId_from_image_path(supabase, refs[0].bucket, refs[0].path);
     const uploadResponse = await uploadB64ImageToSupabase(
       supabase,
       filename,
       imageBase64,
-      parent_id
     );
     if (uploadResponse) {
       const { data } = supabase.storage
@@ -189,8 +187,7 @@ export async function create_image_edit_with_images_api(
 
   // 4) Use the shared helper for consistency
   const filename = `${Date.now()}.png`;
-  const parent_id = await getImageId_from_image_path(supabase, refs[0].bucket, refs[0].path);
-  const uploadResponse = await uploadB64ImageToSupabase(supabase, filename, image_base64, parent_id);
+  const uploadResponse = await uploadB64ImageToSupabase(supabase, filename, image_base64);
   if (!uploadResponse) throw new Error("Upload to Supabase failed.");
 
   const { data } = supabase.storage.from("mj-photos").getPublicUrl(uploadResponse.path);

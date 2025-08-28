@@ -10,9 +10,18 @@ squarespace store?
 ## todo
 set up a cron job for createDescription_for_all_images
 
-my openai functions should also add metadatacolumn and parent id.
+create new function to programmatically create for. we will need to add a column to metadata for the style
 
-pick images or responses
-then we should programmatically create for a specific artist for a specific album
+given a directory in mj-photos, for each image in that directory, for each artist provided in artist array, if ai photo has not been made for that photo with that artist, create the image with image edit, upload to supabase, save parent and style to metadata
+
+Andy Warhol
+Frida Kahlo
+Henri Matisse
+Pablo Picasso
+Salvador Dalí
+Vincent van Gogh
+
+think about how we want to display these images
 
 upsacle with const HF_MODEL = "stabilityai/stable-diffusion-x4-upscaler";
+
