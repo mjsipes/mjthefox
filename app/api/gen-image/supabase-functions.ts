@@ -5,7 +5,8 @@ import { image_url_to_text } from "./openai-functions";
 export async function uploadB64ImageToSupabase(
   supabase: SupabaseClient,
   filename: string,
-  base64: string
+  base64: string,
+  parent_id: string | null = null
 ) {
   console.log("uploadB64ImageToSupabase filename:", filename)
   const buffer = Buffer.from(base64, "base64");
@@ -15,8 +16,19 @@ export async function uploadB64ImageToSupabase(
       contentType: "image/jpeg",
       upsert: true,
     });
+  if (error) {
+    console.log("uploadB64ImageToSupabase error:", error)
+    return null;
+  }
   console.log("uploadB64ImageToSupabase data:", data)
-  console.log("uploadB64ImageToSupabase error:", error)
+  const {data: data1,error: error1} = await supabase.from("image_metadata").insert({
+    image_id: data.id,
+    parent_id: parent_id,
+  }).select("*");
+  if (error1) {
+    console.error("uploadB64ImageToSupabase metadata error:", error1);
+  }
+  console.log("uploadB64ImageToSupabase metadata data:", data1)
   return data;
 }
 
@@ -32,6 +44,7 @@ export async function getImageId_from_url(supabase: SupabaseClient, image_url: s
   return data;
 }
 export async function getImageId_from_image_path(supabase: SupabaseClient, image_bucket: string, image_path: string) {
+
   //get image_id
   const {data,error} = await supabase.rpc("get_image_id_from_image_path", {image_bucket: image_bucket, image_path: image_path});
   if (error) {
@@ -39,7 +52,7 @@ export async function getImageId_from_image_path(supabase: SupabaseClient, image
     return null;
   }
   console.log("getImageId_from_image_id data:", data)
-  return data[0].image_id;
+  return data;
 }
 export async function getImageUrl_from_image_id(supabase: SupabaseClient, image_id: string) {
   //get image bucket and path

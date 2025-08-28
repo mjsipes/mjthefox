@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { toFile } from "openai";
-import { uploadB64ImageToSupabase } from "./supabase-functions";
+import { getImageId_from_image_path, uploadB64ImageToSupabase } from "./supabase-functions";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export async function image_url_to_text(openai: OpenAI, image_url: string) {
@@ -132,10 +132,12 @@ export async function create_image_edit_with_responses(
   if (imageData.length > 0) {
     const imageBase64 = imageData[0]; // guaranteed string by the filter
     const filename = `${Date.now()}`;
+    const parent_id = await getImageId_from_image_path(supabase, refs[0].bucket, refs[0].path);
     const uploadResponse = await uploadB64ImageToSupabase(
       supabase,
       filename,
-      imageBase64
+      imageBase64,
+      parent_id
     );
     if (uploadResponse) {
       const { data } = supabase.storage
@@ -181,24 +183,18 @@ export async function create_image_edit_with_images_api(
     size: "1536x1024",
   });
 
-  // 3) Upload to Supabase
+  // 3) Grab base64 result
   const image_base64 = response.data?.[0]?.b64_json;
   if (!image_base64) throw new Error("No image returned from Images API.");
 
+  // 4) Use the shared helper for consistency
   const filename = `${Date.now()}.png`;
-  const bytes = Buffer.from(image_base64, "base64");
-  const { data: uploaded, error: upErr } = await supabase.storage
-    .from("mj-photos")
-    .upload(filename, bytes, {
-      contentType: "image/png",
-    });
+  const parent_id = await getImageId_from_image_path(supabase, refs[0].bucket, refs[0].path);
+  const uploadResponse = await uploadB64ImageToSupabase(supabase, filename, image_base64, parent_id);
+  if (!uploadResponse) throw new Error("Upload to Supabase failed.");
 
-  if (upErr || !uploaded) {
-    throw new Error(`Upload failed: ${upErr?.message || "unknown"}`);
-  }
-
-  const { data } = supabase.storage.from("mj-photos").getPublicUrl(uploaded.path);
+  const { data } = supabase.storage.from("mj-photos").getPublicUrl(uploadResponse.path);
   console.log("create_image_edit_with_images_api image url:", data.publicUrl);
 
-  return { path: uploaded.path, publicUrl: data.publicUrl };
+  return { path: uploadResponse.path, publicUrl: data.publicUrl };
 }

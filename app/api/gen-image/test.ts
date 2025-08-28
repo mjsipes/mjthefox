@@ -13,15 +13,15 @@ const prompt = "please draw: This image appears to be a highly stylized, pop art
 
 // image_url_to_text(client, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/ai/gpt4-responses-1756165177075.jpg");
 
-// create_image_with_responses(prompt, client, supabase);
 // create_image_with_images_generate(prompt, client, supabase);
+// create_image_with_responses(prompt, client, supabase);
 
-// create_image_edit_with_responses(client, supabase, "transform into style of monet: ", [
+// create_image_edit_with_images_api(client, supabase, "transform into style of picasso: ", [
 //   { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
 // ]);
-// create_image_edit_with_images_api(client, supabase, "transform into style of monet: ", [
-//   { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
-// ]);
+create_image_edit_with_responses(client, supabase, "transform into style of monet: ", [
+  { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
+]);
 
 // getImageId_from_url(supabase, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/ai/basket.png");
 // getImageId_from_image_path(supabase, "mj-photos", "ai/basket.png");
@@ -31,9 +31,7 @@ const prompt = "please draw: This image appears to be a highly stylized, pop art
 // getImagePath_from_image_url(supabase, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/ai/basket.png");
 
 // createMetadataRow_from_image_url(supabase, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/cloud-9/large/14-IMG_2089.jpg");
-
 // createMetadataRow_for_all_images(supabase); 
 
 // createDescription_from_image_url(client, supabase, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/cloud-9/large/14-IMG_2089.jpg");
-
-createDescription_for_all_images(client, supabase);
+// createDescription_for_all_images(client, supabase);
