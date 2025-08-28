@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
 import { useInvert } from "@/components/invert-provider";
+import { useArtistImage } from "@/hooks/use-artist-image";
 
 export default function ImageView({
   albumName,
@@ -17,6 +18,9 @@ export default function ImageView({
   const { albumImageMetadata } = useAlbumImagesMetadata(albumName);
   const router = useRouter();
   const { inverted } = useInvert();
+  
+  const imagePath = `mj-photos/${albumName}/large/${imageName}`;
+  const { imageUrl } = useArtistImage(imagePath);
 
   const navigateToImage = useCallback((direction: 'prev' | 'next') => {
     const currentIndex = albumImageMetadata.findIndex(img => img.name === imageName);
@@ -63,8 +67,6 @@ export default function ImageView({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [imageName, albumImageMetadata, albumName, router, navigateToImage]);
 
-  const imagePath = `mj-photos/${albumName}/large/${imageName}`;
-
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] p-4 relative">
       <div className="absolute left-0 top-0 w-1/3 h-full cursor-w-resize z-10" onClick={() => navigateToImage('prev')} 
@@ -73,7 +75,7 @@ export default function ImageView({
       />
       <Image
         loader={supabaseLoader as ImageLoader}
-        src={imagePath}
+        src={imageUrl || imagePath}
         alt={`${imageName} from ${albumName}`}
         width={1600}
         height={1200}

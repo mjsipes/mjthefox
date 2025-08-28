@@ -6,6 +6,7 @@ import { ImageLoader } from "next/image";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
 import { useAlbumsMetadata } from "@/hooks/use-albums-metadata";
 import { useInvert } from "@/components/invert-provider";
+import { useArtistImage } from "@/hooks/use-artist-image";
 
 // Album organization matching sidebar structure
 const albumCategories = {
@@ -27,9 +28,25 @@ const albumCategories = {
   ]
 };
 
+function AlbumCover({ album }: { album: any }) {
+  const { inverted } = useInvert();
+  const { imageUrl } = useArtistImage(album.firstImageUrl);
+
+  return (
+    <div className="aspect-video relative">
+      <Image
+        loader={supabaseLoader as ImageLoader}
+        src={imageUrl || album.firstImageUrl}
+        alt={`${album.name} album cover`}
+        fill
+        className={`object-cover ${inverted ? 'invert' : ''}`}
+      />
+    </div>
+  );
+}
+
 export default function AlbumsGrid() {
   const { albumsMetadata, loading } = useAlbumsMetadata();
-  const { inverted } = useInvert();
 
   if (loading) {
     return (
@@ -63,15 +80,7 @@ export default function AlbumsGrid() {
           key={album.name}
           href={`/${album.name}`}
         >
-          <div className="aspect-video relative">
-            <Image
-              loader={supabaseLoader as ImageLoader}
-              src={album.firstImageUrl}
-              alt={`${album.name} album cover`}
-              fill
-              className={`object-cover ${inverted ? 'invert' : ''}`}
-            />
-          </div>
+          <AlbumCover album={album} />
           <div className="p-4 text-center">
             <h3 className="font-medium capitalize">
               {album.name.replace(/-/g, ' ')}

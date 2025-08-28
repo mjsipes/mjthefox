@@ -9,6 +9,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
 import { InvertProvider } from "@/components/invert-provider";
 import { InvertToggle } from "@/components/invert-toggle";
+import { ArtistProvider } from "@/components/artist-provider";
+import { ArtistSelect } from "@/components/artist-select";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,7 +43,8 @@ export default function RootLayout({
           enableSystem
         >
           <InvertProvider>
-            <SidebarProvider>
+            <ArtistProvider>
+              <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
               <header className="flex h-16 shrink-0 items-center gap-2 border-b lg:sticky top-0 z-10 bg-background overflow-hidden">
@@ -49,13 +52,15 @@ export default function RootLayout({
                   <SidebarTrigger />
                   <ModeToggle />
                   <InvertToggle />
+                  <ArtistSelect />
                   <div className="border-l border-border h-6 mx-2" />
                   <DynamicBreadcrumb />
                 </div>
               </header>
               {children}
-            </SidebarInset>
-          </SidebarProvider>
+                          </SidebarInset>
+              </SidebarProvider>
+            </ArtistProvider>
           </InvertProvider>
         </ThemeProvider>
       </body>
