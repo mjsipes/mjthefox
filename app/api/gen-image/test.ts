@@ -2,25 +2,25 @@
 
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
-import {create_image_edit_with_responses, create_image_with_images_generate, create_image_with_responses, create_image_edit_with_images_api} from "./openai-functions";
-
+import {create_image_edit_with_responses, create_image_with_images_generate, create_image_with_responses, create_image_edit_with_images_api, image_url_to_text} from "./openai-functions";
+import {getImageUrl_from_image_id} from "./supabase-functions";
 const client = new OpenAI();
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
-const prompt = "please create an artistic illustration of the following description: The image features a wide-angled view of a bay area with a prominent skyline in the distance. The foreground highlights several ships scattered across the calm waters. The cityscape is set against a backdrop of rolling hills and mountains, partly shrouded in mist, creating a layered effect. The sky is mostly clear with scattered clouds, and the overall color palette is a blend of soft blues and grays, contributing to a tranquil, serene mood. The composition captures the expanse and scale of the city and its natural surroundings, while also highlighting the busy maritime activity.";
+const prompt = "please draw: This image appears to be a highly stylized, pop art-inspired depiction of a beach scene. The colors are vivid and unnatural, with a large red sky, a yellow beach, and blue water with some darker shades. The horizon separates the yellow beach and blue water from the intense red sky. The image has a textured, dotted pattern throughout, reminiscent of techniques used in comic book art or works by artists like Roy Lichtenstein. The overall style emphasizes bold, contrasting colors and graphic elements.";
 
-// image_url_to_text(client, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/new-zealand/large/8-IMG_0416.jpg");
+// image_url_to_text(client, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/ai/gpt4-responses-1756165177075.jpg");
 
 // create_image_with_responses(prompt, client, supabase);
 // create_image_with_images_generate(prompt, client, supabase);
 
-// create_image_edit_with_responses(client, supabase, "transform into watercolor painting: ", [
+// create_image_edit_with_responses(client, supabase, "transform into style of monet: ", [
+//   { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
+// ]);
+// create_image_edit_with_images_api(client, supabase, "transform into style of monet: ", [
 //   { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
 // ]);
 
-
-create_image_edit_with_images_api(client, supabase, "transform into watercolor painting: ", [
-  { bucket: "mj-photos", path: "half-moon-bay/large/1-IMG_2907.jpg" },
-]);
+getImageUrl_from_image_id(supabase, "1bf594fa-b5fb-4e69-85cb-3bbd1988ed89");
