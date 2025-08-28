@@ -18,4 +18,5 @@ Pablo Picasso
 Salvador Dalí
 Vincent van Gogh
 
+look into error handling + better prettier format
 
