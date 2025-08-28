@@ -8,18 +8,11 @@ best way to serve (width, quality, staticprops, prefetching)
 squarespace store?
 
 ## todo
+set up a cron job for createDescription_for_all_images
+
+my openai functions should also add metadatacolumn and parent id.
+
 pick images or responses
-set up a cron job - create a function that takes metadata roq, if no description it makes a description, then a function that takes a image, and if no metadata_row it creates a metadatarow. then a function which for all images, makes a metadata row, and a function which for all metadata rows, if no description it makes a ddescription
-
-save metadata 
-parent, model, prompt?
-
-image name/album <-> image id <-> image url
-image -> all children
-image -> root parent
-
-
-for all images, check if they have metadata, otherwise create a metadata row
-for all metadata rows, if no description, generate description
+then we should programmatically create for a specific artist for a specific album
 
 upsacle with const HF_MODEL = "stabilityai/stable-diffusion-x4-upscaler";
