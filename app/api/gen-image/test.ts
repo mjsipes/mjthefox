@@ -38,5 +38,5 @@ const artists = ["Andy Warhol", "Frida Kahlo", "Henri Matisse", "Pablo Picasso",
 // createDescription_from_image_url(client, supabase, "https://gjbeonnspjcwyrpgcnuz.supabase.co/storage/v1/object/public/mj-photos/cloud-9/large/14-IMG_2089.jpg");
 // createDescription_for_all_images(client, supabase);
 
-// lets_get_this_bread(client, supabase, "mj-photos", "kauai/large/", artists);
-lgtb(client, supabase, "faf121c6-f615-41ab-85dc-5def4d5c763a", artists);
+lets_get_this_bread(client, supabase, "mj-photos", "kauai/large/", artists);
+// lgtb(client, supabase, "faf121c6-f615-41ab-85dc-5def4d5c763a", artists);

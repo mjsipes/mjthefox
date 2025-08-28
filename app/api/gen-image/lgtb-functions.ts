@@ -27,10 +27,10 @@ export async function lets_get_this_bread(
   }
   console.log("lgtb data:", data);
 
-  // Process all images in parallel
-  await Promise.all(
-    data.map(image => lgtb(client, supabase, image.id, artists))
-  );
+  // Process all images sequentially for rate limiting
+  for (const image of data) {
+    await lgtb(client, supabase, image.id, artists);
+  }
 }
 
 export async function lgtb(
