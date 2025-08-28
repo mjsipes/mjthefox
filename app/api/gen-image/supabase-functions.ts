@@ -20,32 +20,57 @@ export async function uploadB64ImageToSupabase(
 
 export async function getImageId_from_url(supabase: SupabaseClient, image_url: string) {
   //take image url, convert to bucket and path
-  //get image_id
+  const {bucket, path} = await getImagePath_from_image_url(supabase, image_url);
+  const {data,error} = await supabase.rpc("get_image_id_from_image_path", {image_bucket: bucket, image_path: path});
+  if (error) {
+    console.error("getImageId_from_url error:", error);
+    return null;
+  }
+  console.log("getImageId_from_url data:", data)
+  return data[0].image_id;
 }
 export async function getImageId_from_image_path(supabase: SupabaseClient, image_bucket: string, image_path: string) {
   //get image_id
+  const {data,error} = await supabase.rpc("get_image_id_from_image_path", {image_bucket: image_bucket, image_path: image_path});
+  if (error) {
+    console.error("getImageId_from_image_path error:", error);
+    return null;
+  }
+  console.log("getImageId_from_image_id data:", data)
+  return data[0].image_id;
 }
 export async function getImageUrl_from_image_id(supabase: SupabaseClient, image_id: string) {
   //get image bucket and path
-  const {data ,error} = await supabase.rpc("get_image_bucket_and_path_from_image_id", {image_id: image_id});
-  if (error) {
-    console.error("getImageUrl_from_image_id error:", error);
-    return null;
-  }
-  console.log("getImageUrl_from_image_id data:", data)
+  const {bucket_id, name} = await getImagePath_from_image_id(supabase, image_id);
   //get image url
-  const { data: data1 } = await supabase.storage.from(data[0].bucket_id).getPublicUrl(data[0].name);
-  console.log("getImageUrl_from_image_id data1:", data1)
-  return data1.publicUrl;
+  const { data: data } = await supabase.storage.from(bucket_id).getPublicUrl(name);
+  console.log("getImageUrl_from_image_id data1:", data)
+  return data.publicUrl;
 }
 export async function getImageUrl_from_image_path(supabase: SupabaseClient, image_bucket: string, image_path: string) {
   //get image url
   const { data } = await supabase.storage.from(image_bucket).getPublicUrl(image_path);
+  console.log("getImageUrl_from_image_path data:", data)
   return data.publicUrl;
 }
 export async function getImagePath_from_image_id(supabase: SupabaseClient, image_id: string) {
+  const {data,error} = await supabase.rpc("get_image_bucket_and_path_from_image_id", {image_id: image_id});
+  if (error) {
+    console.error("getImagePath_from_image_id error:", error);
+    return null;
+  }
+  console.log("getImagePath_from_image_id data:", data)
+  return data[0].bucket_id, data[0].name;
 }
 export async function getImagePath_from_image_url(supabase: SupabaseClient, image_url: string) {
+  const u = new URL(image_url);
+  // /storage/v1/object/public/<bucket>/<path>
+  const parts = u.pathname.split("/");
+  const bucket = parts[5]; // after "public"
+  const path = parts.slice(6).join("/");
+  console.log("getImagePath_from_image_url bucket:", bucket)
+  console.log("getImagePath_from_image_url path:", path)
+  return {bucket, path};
 }
 
 export async function createMetadataRow_from_image_url(supabase: SupabaseClient, image_url: string) {
