@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import OpenAI from "openai";
 import { toFile } from "openai";
 import { uploadB64ImageToSupabase } from "./supabase-functions";

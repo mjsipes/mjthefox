@@ -10,7 +10,7 @@ import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
 import { useInvert } from "@/components/invert-provider";
 import { useArtistImage } from "@/hooks/use-artist-image";
 
-function AlbumImage({ item, albumName, index }: { item: any, albumName: string, index: number }) {
+function AlbumImage({ item, albumName, index }: { item: { url: string; name: string }, albumName: string, index: number }) {
   const { inverted } = useInvert();
   const { imageUrl } = useArtistImage(item.url);
 

@@ -28,7 +28,7 @@ const albumCategories = {
   ]
 };
 
-function AlbumCover({ album }: { album: any }) {
+function AlbumCover({ album }: { album: { name: string; firstImageUrl: string } }) {
   const { inverted } = useInvert();
   const { imageUrl } = useArtistImage(album.firstImageUrl);
 
