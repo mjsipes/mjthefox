@@ -48,9 +48,11 @@ export async function create_image_with_images_generate(
     if (uploadResponse) {
       const { data } = supabase.storage.from("mj-photos").getPublicUrl(uploadResponse.path);
       console.log("create_image_with_images_generate image url:", data.publicUrl);
+      return uploadResponse.id;
     }
   }
 }
+
 
 // https://platform.openai.com/docs/guides/tools-image-generation
 export async function create_image_with_responses(

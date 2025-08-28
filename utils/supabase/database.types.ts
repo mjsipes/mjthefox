@@ -16,22 +16,22 @@ export type Database = {
     Tables: {
       image_metadata: {
         Row: {
+          artist: string | null
           description: string | null
           image_id: string
           parent_id: string | null
-          style: string | null
         }
         Insert: {
+          artist?: string | null
           description?: string | null
           image_id?: string
           parent_id?: string | null
-          style?: string | null
         }
         Update: {
+          artist?: string | null
           description?: string | null
           image_id?: string
           parent_id?: string | null
-          style?: string | null
         }
         Relationships: []
       }

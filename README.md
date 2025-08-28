@@ -16,8 +16,7 @@ image quality and size versus image speed tradeoff
 - openai images versus responses endpoint
 - caching in browser / network tab / hard reloads
 - image format / using file system . basae64.
-
-?vercel image endpoint / midjounrey image endpoints
+- image transformations on the fly = wrong
 
 creating a nondestructive database that grows with my project. we do not know how this app will transform, but never deleting from the database ex? large and small.
 prefetching
