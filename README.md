@@ -7,21 +7,23 @@ https://gar-bassoon-8hk7.squarespace.com/
 
 
 ## The Journey Behind the Tech
-4 years ago i created a photo website
-now it is my coming of age / time to create from scratch
-used nextjs / supabase
-image quality and size versus image speed tradeoff
--supabase transformations / nextjs Image components / supabase nextjs image loader
--prefetching html versus remote links, getstaticprops, squarespace does a great job at this, hard to replicate and not good documentation online for best practices. struggled with trying to use the framework versus going rogue
-- openai images versus responses endpoint
-- caching in browser / network tab / hard reloads
-- image format / using file system . basae64.
-- image transformations on the fly = wrong
+4 years ago i created a photo website.
+with squarespace
+coming of age to code from scratch
+supabase + nextjs
+two step process for my app. step 
+1: recreate my squarespace website. 
+2: add to it in ways I was incapable of previously
+spent a lot of time wrestling with quality vs speed and prefetching to match squarespace in speed and quality
+give squarespace props
+my app is still not at that point
+did have a very beutiful display so happy about that.
+then decided to explore ways I would want to improve on my website
+love ai gen images, dallee might have been my first exposure to gen-ai and drew me away from photography softmore year and closer to my computer science + ml study.
+openai has two options: images endpoint and responses endpoint
+talk about databse archtecture, building for the unkown,
+success i did it!
 
-creating a nondestructive database that grows with my project. we do not know how this app will transform, but never deleting from the database ex? large and small.
-prefetching
-
-cool idea of style transfer for images
 
 ## Tech Stack
 - **Frontend**: [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
@@ -52,19 +54,18 @@ cool idea of style transfer for images
 - Planning for app evolution
 - Database design decisions
 
-### AI Integration: Images vs Text Endpoints
+creating a nondestructive database that grows with my project. we do not know how this app will transform, but never deleting from the database ex? large and small.
+
+### AI Integration: Images vs Responses Endpoints
 [Detail your OpenAI integration choices and learnings]
 
 ## What I'm Proud Of
 - **Performance Optimization**: [Specific metrics/improvements]
 - **Custom Image Pipeline**: [Your unique approach]
-- **Style Transfer Experiments**: [Cool AI features]
+cool idea of style transfer for images
+better understanding of caching in browser / network tab / hard reloads
 
 
 
-
-
-
-
-
-
+## Whats Next
+- image format / using file system . basae64.
