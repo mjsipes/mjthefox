@@ -1,12 +1,12 @@
-# mjthefox.com 🎨🎵
+# mjthefox.com 📸✨
 
-**Live App: https://drawtunes.vercel.app/**
+**Live App: https://mjthefox.com/**
 https://mjthefox.vercel.app/
 https://mjthefox.com/
 https://gar-bassoon-8hk7.squarespace.com/
 
-## The Journey Behind the Tech
 
+## The Journey Behind the Tech
 4 years ago i created a photo website
 now it is my coming of age / time to create from scratch
 used nextjs / supabase
@@ -23,18 +23,48 @@ prefetching
 
 cool idea of style transfer for images
 
-
-
 ## Tech Stack
-
-- **Frontend**: Built with [NextJS](https://nextjs.org/)
-- **Styling**: Designed with [Tailwind CSS](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com)
-- **Backend**: Powered by [Supabase](https://supabase.com) (PostgreSQL + Storage)
-- **APIs**: OpenAI API Images and Responses API
-- **Hosting**: Deployed on [Vercel](https://vercel.com)
+- **Frontend**: [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
+- **Backend**: [Supabase](https://supabase.com/) + [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
+- **AI**: [OpenAI Images API](https://platform.openai.com/docs/guides/images) for style transfer
+- **Hosting**: [Vercel](https://vercel.com/)
 
 ## Technical Challenges & Solutions
 
+### The Image Performance Puzzle: Quality vs Speed
+[This seems like your biggest technical story - expand on:]
+- Supabase transformations vs Next.js Image components
+- Browser caching strategies and network optimization
+- Image format decisions and file system vs base64
+- Why "image transformations on the fly = wrong"
 
-## Personal Takeaways
+### Prefetching Strategy: Framework vs Custom Solutions
+[Expand on your struggles with:]
+- getStaticProps implementation
+- HTML prefetching vs remote links
+- Learning from Squarespace's approach
+- When to use the framework vs "going rogue"
+
+### Database Architecture: Building for the Unknown
+[Expand on your "nondestructive database" philosophy:]
+- Why you never delete data
+- Planning for app evolution
+- Database design decisions
+
+### AI Integration: Images vs Text Endpoints
+[Detail your OpenAI integration choices and learnings]
+
+## What I'm Proud Of
+- **Performance Optimization**: [Specific metrics/improvements]
+- **Custom Image Pipeline**: [Your unique approach]
+- **Style Transfer Experiments**: [Cool AI features]
+
+
+
+
+
+
+
+
 
