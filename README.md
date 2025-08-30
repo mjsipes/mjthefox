@@ -1,32 +1,19 @@
+
 # mjthefox.com 📸✨
 
-**Live App: https://mjthefox.com/**
-https://mjthefox.vercel.app/
-https://mjthefox.com/
-https://gar-bassoon-8hk7.squarespace.com/
+**Live:** [https://mjthefox.com/](https://mjthefox.com/)
 
+**Original Squarespace (for comparison):** [https://gar-bassoon-8hk7.squarespace.com/](https://gar-bassoon-8hk7.squarespace.com/)
 
-New Photo Website!!!
+Happy to share my new photography website :)
 
-## The Journey Behind the Tech
-4 years ago i created a photo website with squarespace
-now i create from scratch with supabase + nextjs
+Four years ago, I first built a photography site with Squarespace. This summer, I challenged myself to recreate it from scratch by studying how Squarespace loads images through Chrome DevTools and looking at how their files and URLs are organized. Using Next.js and Supabase, I rebuilt the site to achieve the same display quality. Squarespace still sets the benchmark for speed, but I’m experimenting with optimizations like metadata caching and responsive thumbnails to close the gap.
 
-two step process for my app. step 
-1: recreate my squarespace website. 
-2: add to it in ways I was incapable of previously
+Going beyond a simple rebuild, I used AI to reinterpret my 300 personal photographs in the styles of Andy Warhol, Frida Kahlo, Henri Matisse, Pablo Picasso, Salvador Dalí, and Vincent van Gogh. 
 
-1: current comparison: https://mjthefox.com/
-https://gar-bassoon-8hk7.squarespace.com/
-my image quality and beutiful display is great so happy about that, but squarespace is faster, they do better image optimization and prefetching which i must work on. so very impressive square space!
+The technical journey shaped much of the project. I used Next.js dynamic API routes to generate my pages and stored all images in Supabase Storage. To organize them, I built a metadata table that links each photo to its attributes and, when applicable, to its parent images—connections that let me track originals alongside AI reinterpretations. I designed the database to be “built for the unknown,” meaning I could preserve dead-end experiments rather than delete them, much like commenting out code instead of removing it entirely.
 
-
-2: decided to pay 100 dollars to transform 300 of my personal photographs into paintings from culturally significant artists.
-openai has two options: images endpoint and responses endpoint - studied / learned about these two endpoints. chose images endpoint
-created program to to batch process my images, store resulting images, and link them to original image with postgres.
-
-TODO:
-make website faster: cache ai image metadata, remove supabase image transformations, use image thumbnails
+To streamline the image generation of 1,800 photos, I wrote Node.js scripts that handled every step: creating AI images with OpenAI, uploading them to Supabase, and writing their metadata links to the database. Performance remains the biggest challenge, so I’m continuing to test techniques like caching, storing multiple image sizes, and prefetching.
 
 
 ## Tech Stack
