@@ -1,24 +1,24 @@
-
 # mjthefox.com 📸✨
 
 **Live:** [https://mjthefox.com/](https://mjthefox.com/)
 
 **Original Squarespace (for comparison):** [https://gar-bassoon-8hk7.squarespace.com/](https://gar-bassoon-8hk7.squarespace.com/)
 
-Happy to share my new photography website :)
+Four years ago, during COVID, I built [this Squarespace site](https://gar-bassoon-8hk7.squarespace.com/) to share my astrophotography with friends and family. Anyone who knows me knows how much I care about this collection. Over the years, I modified and expanded the site, but this summer I began a new evolution of my photo website.
 
-Four years ago, I first built a photography site with Squarespace. This summer, I challenged myself to recreate it from scratch by studying how Squarespace loads images through Chrome DevTools and looking at how their files and URLs are organized. Using Next.js and Supabase, I rebuilt the site to achieve the same display quality. Squarespace still sets the benchmark for speed, but I’m experimenting with optimizations like metadata caching and responsive thumbnails to close the gap.
+This evolution meant leaving Squarespace behind and creating the site from the ground up. As a CS major, this felt like a bit of a coming-of-age project. Building from scratch was both exciting and challenging. I studied how Squarespace loads images through Chrome DevTools and set that as my benchmark for speed and quality. I’ve managed to match the display quality, though Squarespace still wins on raw speed. To close the gap, I’m currently experimenting with tricks like image metadata caching, responsive thumbnails, and prefetching.
 
-Going beyond a simple rebuild, I used AI to reinterpret my 300 personal photographs in the styles of Andy Warhol, Frida Kahlo, Henri Matisse, Pablo Picasso, Salvador Dalí, and Vincent van Gogh. 
+Squarespace has its strengths—beautiful templates, polished components, and incredible performance. I don’t plan to shut down my old site; instead, I see this as a passing of the torch. My new site gives me something Squarespace never could: fine-grained control over my photos and the freedom to experiment.
 
-The technical journey shaped much of the project. I used Next.js dynamic API routes to generate my pages and stored all images in Supabase Storage. To organize them, I built a metadata table that links each photo to its attributes and, when applicable, to its parent images—connections that let me track originals alongside AI reinterpretations. I designed the database to be “built for the unknown,” meaning I could preserve dead-end experiments rather than delete them, much like commenting out code instead of removing it entirely.
+That freedom has already led me in new directions. Inspired by my first exposure to AI through DALL-E (which actually nudged me toward CS and machine learning), I programmatically transformed ~300 of my personal photographs in the styles of Andy Warhol, Frida Kahlo, Henri Matisse, Pablo Picasso, Salvador Dalí, and Vincent van Gogh. In total, I generated ~1,800 images for about $85 in API credits. I’m deeply proud of this project—it feels like a milestone in my journey, and I’m excited to share it with you.
 
-To streamline the image generation of 1,800 photos, I wrote Node.js scripts that handled every step: creating AI images with OpenAI, uploading them to Supabase, and writing their metadata links to the database. Performance remains the biggest challenge, so I’m continuing to test techniques like caching, storing multiple image sizes, and prefetching.
-
+---
 
 ## Tech Stack
-- **Frontend**: [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
-- **Backend**: [Supabase](https://supabase.com/) + [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
-- **AI**: [OpenAI Images API](https://platform.openai.com/docs/guides/images) for style transfer
-- **Hosting**: [Vercel](https://vercel.com/)
+
+* **Frontend**: [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
+* **Backend**: [Supabase](https://supabase.com/) + [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+* **Styling**: [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
+* **AI**: [OpenAI Images API](https://platform.openai.com/docs/guides/images) for style transfer
+* **Hosting**: [Vercel](https://vercel.com/)
+
