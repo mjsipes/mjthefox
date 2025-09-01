@@ -15,7 +15,7 @@ export function ArtistSelect() {
 
   return (
     <Select value={artist} onValueChange={(value: Artist) => setArtist(value)}>
-      <SelectTrigger className="w-[180px] shadow-none">
+      <SelectTrigger className="w-[165px] shadow-none" size="sm">
         <SelectValue placeholder="Select artist style" />
       </SelectTrigger>
       <SelectContent>

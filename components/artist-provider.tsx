@@ -38,9 +38,23 @@ export function ArtistProvider({
 }: ArtistProviderProps) {
   const [artist, setArtist] = React.useState<Artist>(defaultArtist)
 
+  // Load from localStorage on mount
+  React.useEffect(() => {
+    const stored = localStorage.getItem("artist-preference")
+    if (stored && ARTISTS.includes(stored as Artist)) {
+      setArtist(stored as Artist)
+    }
+  }, [])
+
+  // Save to localStorage when artist changes
+  const setArtistWithStorage = React.useCallback((newArtist: Artist) => {
+    setArtist(newArtist)
+    localStorage.setItem("artist-preference", newArtist)
+  }, [])
+
   const value = {
     artist,
-    setArtist,
+    setArtist: setArtistWithStorage,
   }
 
   return (
