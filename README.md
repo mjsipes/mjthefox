@@ -1,6 +1,8 @@
 # mjthefox.com 📸✨
 
 **Live:** [https://mjthefox.com/](https://mjthefox.com/)
+**Github:** [https://github.com/mjsipes/mjthefox](https://github.com/mjsipes/mjthefox)
+
 
 **Original Squarespace (for comparison):** [https://gar-bassoon-8hk7.squarespace.com/](https://gar-bassoon-8hk7.squarespace.com/)
 
