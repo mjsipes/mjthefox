@@ -10,7 +10,7 @@ This evolution meant leaving Squarespace behind and creating the site from the g
 
 Squarespace has its strengths—beautiful templates, polished components, and incredible performance. I don’t plan to shut down my old site; instead, I see this as a passing of the torch. My new site gives me something Squarespace never could: fine-grained control over my photos and the freedom to experiment.
 
-That freedom has already led me in new directions. Inspired by my first exposure to AI through DALL-E (which actually nudged me toward CS and machine learning), I programmatically transformed ~300 of my personal photographs in the styles of Andy Warhol, Frida Kahlo, Henri Matisse, Pablo Picasso, Salvador Dalí, and Vincent van Gogh. In total, I generated ~1,800 images for about $85 in API credits. I’m deeply proud of this project—it feels like a milestone in my journey, and I’m excited to share it with you.
+That freedom has already led me in new directions. Inspired by my first exposure to AI through DALL-E (which actually nudged me toward CS and machine learning), **I programmatically transformed ~300 of my personal photographs in the styles of Andy Warhol, Frida Kahlo, Henri Matisse, Pablo Picasso, Salvador Dalí, and Vincent van Gogh. In total, I generated ~1,800 images for about $120 in API credits.** I’m deeply proud of this project—it feels like a milestone in my journey, and I’m excited to share it with you.
 
 ---
 
