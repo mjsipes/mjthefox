@@ -1,10 +1,8 @@
 # mjthefox.com 📸✨
 
 **Live:** [https://mjthefox.com/](https://mjthefox.com/)
-**Github:** [https://github.com/mjsipes/mjthefox](https://github.com/mjsipes/mjthefox)
-
-
 **Original Squarespace (for comparison):** [https://gar-bassoon-8hk7.squarespace.com/](https://gar-bassoon-8hk7.squarespace.com/)
+**Github:** [https://github.com/mjsipes/mjthefox](https://github.com/mjsipes/mjthefox)
 
 Four years ago, during COVID, I built [this Squarespace site](https://gar-bassoon-8hk7.squarespace.com/) to share my astrophotography with friends and family. Anyone who knows me knows how much I care about this collection. Over the years, I modified and expanded the site, but this summer I began a new evolution of my photo website.
 
