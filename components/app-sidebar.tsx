@@ -112,7 +112,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     {item.title}
                     <span className="opacity-0 group-hover/link:opacity-100">
                       <span className="text-sipes-green">&lt;</span>
-                      <span className="text-sipes-green">-</span>
                       <span className="text-sipes-orange">-</span>
                       <span className="text-sipes-blue">-</span>
                     </span>
@@ -127,7 +126,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             {item.title}
                             <span className="opacity-0 group-hover/sublink:opacity-100">
                               <span className="text-sipes-green">&lt;</span>
-                              <span className="text-sipes-green">-</span>
                               <span className="text-sipes-orange">-</span>
                               <span className="text-sipes-blue">-</span>
                             </span>
