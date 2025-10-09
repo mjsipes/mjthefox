@@ -47,7 +47,7 @@ export default function RootLayout({
               <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-              <header className="flex h-16 shrink-0 items-center gap-2 border-b lg:sticky top-0 z-10 bg-background overflow-hidden">
+              <header className="flex h-16 shrink-0 items-center gap-2 border-b  border-sipes-green lg:sticky top-0 z-10 bg-background overflow-hidden">
                 <div className="flex items-center gap-3 px-3">
                   <SidebarTrigger />
                   {/* <ModeToggle /> */}

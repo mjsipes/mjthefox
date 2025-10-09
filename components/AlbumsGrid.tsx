@@ -79,11 +79,22 @@ export default function AlbumsGrid() {
         <Link
           key={album.name}
           href={`/${album.name}`}
+          className="group hover:opacity-90"
         >
           <AlbumCover album={album} />
           <div className="p-4 text-center">
-            <h3 className="font-medium capitalize">
-              {album.name.replace(/-/g, ' ')}
+            <h3 className="font-medium capitalize text-sm">
+              <span className="group-hover:text-sipes-blue opacity-0 group-hover:opacity-100">-</span>
+              <span className="group-hover:text-sipes-orange opacity-0 group-hover:opacity-100">-</span>
+              <span className="group-hover:text-sipes-green opacity-0 group-hover:opacity-100">-</span>
+              <span className="group-hover:text-sipes-green opacity-0 group-hover:opacity-100">&gt;</span>
+              <span className="group-hover:text-sipes-blue opacity-0 group-hover:opacity-100">[</span>
+              <span className="group-hover:text-sipes-blue">{album.name.replace(/-/g, ' ')}</span>
+              <span className="group-hover:text-sipes-blue opacity-0 group-hover:opacity-100">]</span>
+              <span className="group-hover:text-sipes-green opacity-0 group-hover:opacity-100">&lt;</span>
+              <span className="group-hover:text-sipes-green opacity-0 group-hover:opacity-100">-</span>
+              <span className="group-hover:text-sipes-orange opacity-0 group-hover:opacity-100">-</span>
+              <span className="group-hover:text-sipes-blue opacity-0 group-hover:opacity-100">-</span>
             </h3>
           </div>
         </Link>

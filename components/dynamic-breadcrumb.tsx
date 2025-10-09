@@ -65,6 +65,22 @@ export function DynamicBreadcrumb() {
   
   const breadcrumbs = generateBreadcrumbs()
   
+  // Function to get styled label based on breadcrumb position
+  const getStyledLabel = (label: string, index: number) => {
+    if (index === 0) {
+      // First breadcrumb: no styling changes
+      return label
+    } else if (index === 1) {
+      // Second breadcrumb: blue with brackets (brackets also colored)
+      return <span className="text-sipes-blue">[{label}]</span>
+    } else if (index === 2) {
+      // Third breadcrumb: green with parentheses (parentheses also colored)
+      return <span className="text-sipes-green">({label})</span>
+    }
+    // Default for any additional breadcrumbs
+    return label
+  }
+  
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -72,10 +88,10 @@ export function DynamicBreadcrumb() {
           <React.Fragment key={item.href}>
             <BreadcrumbItem>
               {item.isCurrent ? (
-                <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                <BreadcrumbPage>{getStyledLabel(item.label, index)}</BreadcrumbPage>
               ) : (
                 <BreadcrumbLink asChild>
-                  <Link href={item.href}>{item.label}</Link>
+                  <Link href={item.href}>{getStyledLabel(item.label, index)}</Link>
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>

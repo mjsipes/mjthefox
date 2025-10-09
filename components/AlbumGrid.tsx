@@ -17,7 +17,7 @@ function AlbumImage({ item, albumName, index }: { item: { url: string; name: str
   return (
     <Link
       href={`/${albumName}/${item.name}`}
-      className="relative w-full block hover:opacity-90 transition-opacity"
+      className="relative w-full block hover:opacity-90"
     >
       <Image
         loader={supabaseLoader as ImageLoader}
