@@ -108,9 +108,9 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sipes-blue: oklch(0.628 0.258 262.75);
-  --sipes-green: oklch(0.648 0.194 160.75);
-  --sipes-orange: oklch(0.705 0.218 70.67);
+  --sipes-blue: oklch(0.6641 0.1656 250.39);
+  --sipes-green: oklch(0.5993 0.1317 138.35);
+  --sipes-orange: oklch(0.7624 0.1744 62.22);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
