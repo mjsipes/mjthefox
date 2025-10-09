@@ -85,6 +85,7 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar 
+      className="border-sipes-orange"
       {...props}
     >
       <SidebarHeader className="bg-background border-b border-sipes-orange h-16">
