@@ -17,3 +17,10 @@ upsacle images with stabilityai/stable-diffusion-x4-upscaler
 
 # linkedin post:
 I programmatically transformed ~300 of my personal photographs in the styles of Andy Warhol, Frida Kahlo, Henri Matisse, Pablo Picasso, Salvador Dalí, and Vincent van Gogh. In total, I generated about 1,800 images for ~$120 in API credits—and I built a site from scratch to share them. I’m deeply proud of this project—it feels like a milestone in my journey, and so I’m excited to share it with you and would love to hear your feedback!
+
+movies:
+https://www.youtube.com/watch?v=kgiygCVvFlE&t=3s
+https://www.youtube.com/watch?v=JsojXkcW0f4
+https://www.youtube.com/watch?v=DWaspseTPwc
+https://www.youtube.com/watch?v=ctVXl0rnlmo
+https://www.youtube.com/watch?v=6hMRwhIDWYg

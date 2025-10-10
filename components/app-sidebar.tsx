@@ -15,6 +15,7 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { AsciiArrow } from "@/components/AsciiArrow"
 
 // This is sample data.
 const data = {
@@ -111,9 +112,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Link href={item.url} className="font-medium hover:text-sipes-blue group/link">
                     {item.title}
                     <span className="opacity-0 group-hover/link:opacity-100">
-                      <span className="text-sipes-green">&lt;</span>
-                      <span className="text-sipes-orange">-</span>
-                      <span className="text-sipes-blue">-</span>
+                      <AsciiArrow direction="left" />
                     </span>
                   </Link>
                 </SidebarMenuButton>
@@ -125,9 +124,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           <Link href={item.url} className="hover:text-sipes-blue group/sublink">
                             {item.title}
                             <span className="opacity-0 group-hover/sublink:opacity-100">
-                              <span className="text-sipes-green">&lt;</span>
-                              <span className="text-sipes-orange">-</span>
-                              <span className="text-sipes-blue">-</span>
+                              <AsciiArrow direction="left" />
                             </span>
                           </Link>
                         </SidebarMenuSubButton>
