@@ -106,7 +106,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarMenu>
             {data.navMain.map((item) => (
-              <SidebarMenuItem key={item.title}>
+              <SidebarMenuItem key={item.title} className="group/menu-item">
                 <SidebarMenuButton asChild>
                   <Link href={item.url} className="font-medium hover:text-sipes-blue group/link">
                     {item.title}
@@ -118,7 +118,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </Link>
                 </SidebarMenuButton>
                 {item.items?.length ? (
-                  <SidebarMenuSub>
+                  <SidebarMenuSub className="group-hover/menu-item:border-sipes-green">
                     {item.items.map((item) => (
                       <SidebarMenuSubItem key={item.title}>
                         <SidebarMenuSubButton asChild>
