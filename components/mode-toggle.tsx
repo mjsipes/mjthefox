@@ -8,7 +8,26 @@ import { Button } from "@/components/ui/button"
 
 export function ModeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
   const isDark = resolvedTheme === "dark"
+
+  // Avoid hydration mismatch
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return (
+      <Button 
+        variant="ghost" 
+        size="icon" 
+        className="size-7 focus-visible:ring-0 focus-visible:ring-offset-0"
+      >
+        <Sun className="size-4" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    )
+  }
 
   return (
     <Button 

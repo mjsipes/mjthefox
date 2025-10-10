@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -32,13 +32,12 @@ function AlbumImage({ item, albumName, index }: { item: { url: string; name: str
   );
 }
 
-export default async function Albums({
+export default function Albums({
   params,
 }: {
   params: Promise<{ albumName: string }>;
 }) {
-  const { albumName } = await params;
-
+  const { albumName } = use(params);
   return <AlbumGridContent albumName={albumName} />;
 }
 

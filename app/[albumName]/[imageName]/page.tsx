@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { use, useEffect, useCallback } from "react";
 import Image, { ImageLoader } from "next/image";
 import { useRouter } from "next/navigation";
 import supabaseLoader from "@/utils/supabase/supabase-image-loader";
@@ -8,13 +8,12 @@ import { useAlbumImagesMetadata } from "@/hooks/use-album-images-metadata";
 import { useInvert } from "@/components/invert-provider";
 import { useArtistImage } from "@/hooks/use-artist-image";
 
-export default async function ImagePage({
+export default function ImagePage({
   params,
 }: {
   params: Promise<{ albumName: string; imageName: string }>;
 }) {
-  const { albumName, imageName } = await params;
-  
+  const { albumName, imageName } = use(params);
   return <ImageViewContent albumName={albumName} imageName={imageName} />;
 }
 
