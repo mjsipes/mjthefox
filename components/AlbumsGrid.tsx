@@ -79,7 +79,7 @@ export default function AlbumsGrid() {
         <Link
           key={album.name}
           href={`/${album.name}`}
-          className="group hover:opacity-90"
+            className="group border border-transparent hover:border-sipes-green"
         >
           <AlbumCover album={album} />
           <div className="p-4 text-center">
