@@ -86,14 +86,14 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar 
-      className="border-sipes-orange"
+      className="border-sipes-blue dark:border-sipes-orange"
       {...props}
     >
-      <SidebarHeader className="bg-background border-b border-sipes-orange h-16">
+      <SidebarHeader className="bg-background border-b border-sipes-blue dark:border-sipes-orange h-16">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/" className="hover:text-sipes-blue">
+              <Link href="/" className="border border-dashed border-transparent hover:border-sipes-blue dark:hover:border-sipes-orange">
                 <Image src="/favicon.ico" alt="Turtle" className="aspect-square size-8 " width={32} height={32} />
                 <div className="flex flex-col gap-0.5 leading-none ">
                   <span className="font-medium">Mjsipes Photography</span>
@@ -109,11 +109,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             {data.navMain.map((item) => (
               <SidebarMenuItem key={item.title} className="group/menu-item">
                 <SidebarMenuButton asChild>
-                  <Link href={item.url} className="font-medium hover:text-sipes-blue group/link">
+                  <Link href={item.url} className="font-medium border border-dashed border-transparent hover:border-sipes-blue dark:hover:border-sipes-orange group/link">
                     {item.title}
-                    <span className="opacity-0 group-hover/link:opacity-100">
-                      <AsciiArrow direction="left" />
-                    </span>
                   </Link>
                 </SidebarMenuButton>
                 {item.items?.length ? (
@@ -121,11 +118,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     {item.items.map((item) => (
                       <SidebarMenuSubItem key={item.title}>
                         <SidebarMenuSubButton asChild>
-                          <Link href={item.url} className="hover:text-sipes-blue group/sublink">
+                          <Link href={item.url} className="border border-dashed border-transparent hover:border-sipes-blue dark:hover:border-sipes-orange group/sublink">
                             {item.title}
-                            <span className="opacity-0 group-hover/sublink:opacity-100">
-                              <AsciiArrow direction="left" />
-                            </span>
                           </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>

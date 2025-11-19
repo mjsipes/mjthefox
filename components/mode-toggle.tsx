@@ -21,7 +21,7 @@ export function ModeToggle() {
       <Button 
         variant="ghost" 
         size="icon" 
-        className="size-7 focus-visible:ring-0 focus-visible:ring-offset-0"
+        className="size-7 border border-dashed border-transparent hover:border-sipes-blue dark:hover:border-sipes-orange hover:bg-sidebar-accent cursor-pointer focus-visible:ring-0 focus-visible:ring-offset-0"
       >
         <Sun className="size-4" />
         <span className="sr-only">Toggle theme</span>
@@ -33,7 +33,7 @@ export function ModeToggle() {
     <Button 
       variant="ghost" 
       size="icon" 
-      className="size-7 focus-visible:ring-0 focus-visible:ring-offset-0"
+      className="size-7 border border-dashed border-transparent hover:border-sipes-blue dark:hover:border-sipes-orange hover:bg-sidebar-accent cursor-pointer focus-visible:ring-0 focus-visible:ring-offset-0"
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
       <Sun className={`size-4 transition-all ${isDark ? 'scale-0 -rotate-90' : 'scale-100 rotate-0'}`} />

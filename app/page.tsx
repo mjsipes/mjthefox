@@ -81,16 +81,12 @@ export default function Home() {
           <Link
             key={album.name}
             href={`/${album.name}`}
-            className="group border border-transparent hover:border-sipes-green"
+            className="group border border-transparent hover:border-sipes-blue dark:hover:border-sipes-orange"
           >
             <AlbumCover album={album} />
             <div className="p-4 text-center">
               <h3 className="font-medium capitalize text-sm">
-                <AsciiArrow direction="right" />
-                <span className="group-hover:text-sipes-blue opacity-0 group-hover:opacity-100">[</span>
-                <span className="group-hover:text-sipes-blue">{album.name.replace(/-/g, ' ')}</span>
-                <span className="group-hover:text-sipes-blue opacity-0 group-hover:opacity-100">]</span>
-                <AsciiArrow direction="left" />
+                {album.name.replace(/-/g, ' ')}
               </h3>
             </div>
           </Link>

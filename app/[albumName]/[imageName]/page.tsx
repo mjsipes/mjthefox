@@ -78,7 +78,7 @@ function ImageViewContent({
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] p-4">
-      <div className="relative inline-block border border-transparent hover:border-sipes-green">
+      <div className="relative inline-block border border-transparent hover:border-sipes-blue dark:hover:border-sipes-orange">
         <Image
           loader={supabaseLoader as ImageLoader}
           src={imageUrl || imagePath}

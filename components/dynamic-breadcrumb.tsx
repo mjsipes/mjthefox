@@ -67,18 +67,8 @@ export function DynamicBreadcrumb() {
   
   // Function to get styled label based on breadcrumb position
   const getStyledLabel = (label: string, index: number) => {
-    if (index === 0) {
-      // First breadcrumb: no styling changes
-      return label
-    } else if (index === 1) {
-      // Second breadcrumb: blue with brackets (brackets also colored)
-      return <span className="text-sipes-blue">[{label}]</span>
-    } else if (index === 2) {
-      // Third breadcrumb: green with parentheses (parentheses also colored)
-      return <span className="text-sipes-green">({label})</span>
-    }
-    // Default for any additional breadcrumbs
-    return label
+    // All breadcrumbs: green without any decorations
+    return <span className="text-sipes-green">{label}</span>
   }
   
   return (

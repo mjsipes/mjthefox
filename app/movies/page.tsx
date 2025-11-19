@@ -62,7 +62,7 @@ export default function MoviesPage() {
       {/* YouTube Videos Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
         {movies.map((movie) => (
-          <div key={movie.id} className="relative w-full border border-transparent hover:border-sipes-green">
+          <div key={movie.id} className="relative w-full border border-transparent hover:border-sipes-blue dark:hover:border-sipes-orange">
             <div className="relative w-full aspect-video">
               <iframe
                 width="100%"
@@ -82,7 +82,7 @@ export default function MoviesPage() {
       {/* Hosted Videos Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
         {hostedVideos.map((video) => (
-          <div key={video.id} className="relative w-full border border-transparent hover:border-sipes-green">
+          <div key={video.id} className="relative w-full border border-transparent hover:border-sipes-blue dark:hover:border-sipes-orange">
             <VideoPlayer className="overflow-hidden">
               <VideoPlayerContent
                 crossOrigin=""
