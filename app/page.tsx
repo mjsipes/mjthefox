@@ -85,8 +85,10 @@ export default function Home() {
           >
             <AlbumCover album={album} />
             <div className="p-4 text-center">
-              <h3 className="font-medium capitalize text-sm">
+              <h3 className="font-medium capitalize text-sm group-hover:text-sipes-green">
+                <span className="opacity-0 group-hover:opacity-100"><AsciiArrow direction="right" /></span>
                 {album.name.replace(/-/g, ' ')}
+                <span className="opacity-0 group-hover:opacity-100"><AsciiArrow direction="left" /></span>
               </h3>
             </div>
           </Link>
