@@ -62,11 +62,21 @@ export default async function DevPortfolio() {
               Michael Sipes
             </h1>
             <nav className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-              <Link className="hover:text-sipes-green" href="https://github.com/mjsipes">
+              <Link
+                className="hover:text-sipes-green"
+                href="https://github.com/mjsipes"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 GitHub
               </Link>
               <span className="text-muted-foreground">|</span>
-              <Link className="hover:text-sipes-green" href="https://www.linkedin.com/in/mjsipes/">
+              <Link
+                className="hover:text-sipes-green"
+                href="https://www.linkedin.com/in/mjsipes/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 LinkedIn
               </Link>
               <span className="text-muted-foreground">|</span>
