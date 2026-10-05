@@ -80,6 +80,11 @@ const data = {
         },
       ],
     },
+    {
+      title: "Developer Portfolio",
+      url: "/dev",
+      items: [],
+    },
   ],
 }
 

@@ -10,7 +10,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { InvertProvider } from "@/components/invert-provider";
 import { InvertToggle } from "@/components/invert-toggle";
 import { ArtistProvider } from "@/components/artist-provider";
-import { ArtistSelect } from "@/components/artist-select";
+// import { ArtistSelect } from "@/components/artist-select";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,7 +52,7 @@ export default function RootLayout({
                   <SidebarTrigger />
                   <ModeToggle />
                   {/* <InvertToggle /> */}
-                  <ArtistSelect />
+                  {/* <ArtistSelect /> */}
                   <div className="border-l border-border h-6 mx-2" />
                   <DynamicBreadcrumb />
                 </div>

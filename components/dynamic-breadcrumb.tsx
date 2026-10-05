@@ -31,10 +31,15 @@ export function DynamicBreadcrumb() {
     // Add album name if we're in an album
     if (segments.length >= 1) {
       const albumName = segments[0]
-      const formattedAlbumName = albumName
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ')
+      const labelOverrides: Record<string, string> = {
+        dev: "Developer Portfolio",
+      }
+      const formattedAlbumName =
+        labelOverrides[albumName] ??
+        albumName
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
       
       breadcrumbs.push({
         label: formattedAlbumName,

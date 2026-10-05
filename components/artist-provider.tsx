@@ -33,32 +33,21 @@ const ArtistProviderContext = React.createContext<ArtistProviderState>(initialSt
 
 export function ArtistProvider({
   children,
-  defaultArtist = "Original",
   ...props
 }: ArtistProviderProps) {
-  const [artist, setArtist] = React.useState<Artist>(defaultArtist)
-
-  // Load from localStorage on mount
+  // AI artist styles discontinued — always show originals.
   React.useEffect(() => {
-    const stored = localStorage.getItem("artist-preference")
-    if (stored && ARTISTS.includes(stored as Artist)) {
-      setArtist(stored as Artist)
+    if (
+      typeof window === "undefined" ||
+      typeof window.localStorage?.removeItem !== "function"
+    ) {
+      return
     }
+    window.localStorage.removeItem("artist-preference")
   }, [])
-
-  // Save to localStorage when artist changes
-  const setArtistWithStorage = React.useCallback((newArtist: Artist) => {
-    setArtist(newArtist)
-    localStorage.setItem("artist-preference", newArtist)
-  }, [])
-
-  const value = {
-    artist,
-    setArtist: setArtistWithStorage,
-  }
 
   return (
-    <ArtistProviderContext.Provider {...props} value={value}>
+    <ArtistProviderContext.Provider {...props} value={initialState}>
       {children}
     </ArtistProviderContext.Provider>
   )
